@@ -2,6 +2,17 @@ html,
 body {
   height: 100%;
 }
+.navbar{ background:#ad2044;}
+
+.nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
+
+.nav-link{ margin-right: 1em !important;}
+
+.nav-link:hover{ background: #f4f4f4; color: #f97300; }
+
+.navbar-collapse{ justify-content: flex-end;}
+
+.navbar-toggler{  background:#fff !important;}
 
 .container {
   margin-top: 5rem;
