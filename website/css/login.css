@@ -16,7 +16,6 @@ body {
     border-color: #ad2044;
     box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
   }
-
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -50,32 +49,13 @@ body {
   border-bottom-left-radius: 0;
 }
 
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin #inputPassword {
-  margin-bottom: -1px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin #inputPasswordConfirm {
+.form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-
-
 body{
-
   background-image: url("../img/gamepadsolid.png");
   background-repeat: repeat;
   background-size: 25rem;
