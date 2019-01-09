@@ -1,7 +1,6 @@
 package com.nerdblistersteam.concierge.domain;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,9 +26,6 @@ public class User implements UserDetails {
     private Long id;
 
     @NonNull
-    private String name;
-
-    @NonNull
     @Size(min = 8, max = 20)
     @Column(nullable = false, unique = true)
     private String email;
@@ -50,9 +46,27 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @NonNull
+    @NotEmpty(message = "You must enter a first name.")
+    private String firstName;
+
+    @NonNull
+    @NotEmpty(message = "You must enter a last name.")
+    private String lastName;
+
+    @Transient
+    @Setter(AccessLevel.NONE)
+    private String fullName;
+
     @Transient
     @NotEmpty(message = "Please enter Password Confirmation")
     private String confirmPassword;
+
+    private String activationCode;
+
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
 
     public void addRole(Role role) {
         roles.add(role);
