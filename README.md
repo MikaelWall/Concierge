@@ -1,1 +1,3 @@
-# GetARoom
+# Concierge
+
+Booking made easy
