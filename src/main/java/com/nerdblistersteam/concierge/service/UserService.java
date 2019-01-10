@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -31,6 +32,14 @@ public class UserService {
         user.setEnabled(true);
         save(user);
         return user;
+    }
+
+    public List<User> findByFirstName(String name) {
+        return userRepository.findByFirstName(name);
+    }
+
+    public List<User> findByFullName(String fullName) {
+        return userRepository.findAllByFullName(fullName);
     }
 
     public User save(User user) {
