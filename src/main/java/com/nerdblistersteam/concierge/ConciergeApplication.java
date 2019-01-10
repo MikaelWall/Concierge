@@ -12,7 +12,7 @@ import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 @EnableTransactionManagement
 public class ConciergeApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(SpringApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(ConciergeApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(ConciergeApplication.class, args);

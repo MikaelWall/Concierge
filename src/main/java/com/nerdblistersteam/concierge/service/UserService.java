@@ -17,10 +17,10 @@ public class UserService {
     private final BCryptPasswordEncoder encoder;
     private final RoleService roleService;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder, RoleService roleService) {
+    public UserService(UserRepository userRepository, RoleService roleService) {
         this.userRepository = userRepository;
-        this.encoder = encoder;
         this.roleService = roleService;
+        encoder = new BCryptPasswordEncoder();
     }
 
     public User register(User user) {

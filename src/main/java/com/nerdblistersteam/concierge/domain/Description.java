@@ -14,15 +14,15 @@ import java.util.Collection;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Role {
+public class Description {
 
     @Id
     @GeneratedValue
     private Long id;
 
     @NonNull
-    private String name;
+    private String tag;
 
-    @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+    @ManyToMany(mappedBy = "descriptions")
+    private Collection<Room> rooms;
 }
