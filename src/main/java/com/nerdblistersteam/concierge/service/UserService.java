@@ -38,10 +38,6 @@ public class UserService {
         return userRepository.findByFirstName(name);
     }
 
-    public List<User> findByFullName(String fullName) {
-        return userRepository.findAllByFullName(fullName);
-    }
-
     public User save(User user) {
         return userRepository.save(user);
     }
