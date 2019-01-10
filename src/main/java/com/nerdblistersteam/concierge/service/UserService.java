@@ -57,10 +57,6 @@ public class UserService {
         mailService.sendActivationEmail(user);
     }
 
-    public void sendWelcomeEmail(User user) {
-        mailService.sendWelcomeEmail(user);
-    }
-
     public Optional<User> findByEmailAndActivationCode(String email, String activationCode) {
         return userRepository.findByEmailAndActivationCode(email, activationCode);
     }

@@ -58,10 +58,4 @@ public class MailService {
         logger.debug("Skickar aktiveringsmejl till '{}'", user.getEmail());
         sendEmailFromTemplate(user, "email/activation", "Concierge aktiveringsmejl");
     }
-
-    @Async
-    public void sendWelcomeEmail(User user) {
-        logger.debug("Skickar välkomstmejl till '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "email/welcome", "Välkommen till Concierge!");
-    }
 }
