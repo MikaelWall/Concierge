@@ -2,10 +2,7 @@ package com.nerdblistersteam.concierge.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,7 +23,10 @@ public class Schedule {
     @NonNull
     private LocalDateTime stop;
 
-    @OneToOne(mappedBy = "schedules")
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Room room;
 
 }

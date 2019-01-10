@@ -38,6 +38,10 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean enabled;
 
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Schedule schedule;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",

@@ -2,9 +2,9 @@ package com.nerdblistersteam.concierge.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @RequiredArgsConstructor
@@ -20,4 +20,16 @@ public class Room {
 
     @NonNull
     private String name;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Schedule schedule;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "rooms_descriptions",
+            joinColumns = @JoinColumn(name = "room_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "description_id", referencedColumnName = "id")
+    )
+    private List<Description> descriptions = new ArrayList<>();
 }
