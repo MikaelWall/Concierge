@@ -56,13 +56,13 @@
         <!-- navbar -->
 
         <div class="container text-center">
-                <form class="form-signin">
+                <form class="form-signin" action="log" method="post">
                     <!-- <i class="fas fa-gamepad fa-5x"></i> -->
                     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
                     <label for="userName" class="sr-only">User Name</label>
-                    <input type="text" id="userName" class="form-control" placeholder="Username" required autofocus>
+                    <input type="text" id="userName" name="username" class="form-control" placeholder="Username" required autofocus>
                     <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
                     <p><a href="forgottenpassword.html">Forgot your password?</a> or <a href="registrering.html">Create
                             account</a></p>
                     <div class="checkbox mb-3">
