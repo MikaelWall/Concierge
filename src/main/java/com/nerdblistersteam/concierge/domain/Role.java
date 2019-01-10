@@ -21,7 +21,7 @@ public class Role {
     private Long id;
 
     @NonNull
-    private String role;
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
