@@ -37,11 +37,6 @@ public class AuthController {
         return "/auth/registrering";
     }
 
-    @GetMapping("/createroom")
-    public String createroom() {
-        return "createroom";
-    }
-
     @PostMapping("/register")
     public String registerNewUser(@Valid User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {

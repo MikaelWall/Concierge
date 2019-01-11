@@ -29,14 +29,35 @@
 
         <h1>Skapa ett rum!</h1>
 
-        <form>
+        <form class="form-createroom" action="createroom" method="post">
             Namn på rummet:<br>
-            <input type="text" name="roomname"><br><br>
+            <label for="roomname" class="sr-only">name</label>
+            <input
+                    type="text"
+                    id="roomname"
+                    name="name"
+                    class="form-control"
+                    placeholder="Room name"
+                    required
+                    autofocus
+            /><br><br>
             Antal platser:<br>
-            <input type="number" name="seats"><br><br>
-            <input type="checkbox" name="hdmi" value="Hdmi">HDMI<br>
-            <input type="checkbox" name="whiteboard" value="Whiteboard">Whiteboard<br>
-            <input type="checkbox" name="projector" value="Proector">Projektor<br><br>
+            <input
+                    type="number"
+                    name="seats"
+                    placeholder="Number of seats"/><br><br>
+            <input
+                    type="checkbox"
+                    name="hdmi"
+                    value="Hdmi">HDMI<br>
+            <input
+                    type="checkbox"
+                    name="whiteboard"
+                    value="Whiteboard">Whiteboard<br>
+            <input
+                    type="checkbox"
+                    name="projector"
+                    value="Projector">Projektor<br><br>
 
             <input class="myButton" type="submit" value="Skapa rum">
         </form>
