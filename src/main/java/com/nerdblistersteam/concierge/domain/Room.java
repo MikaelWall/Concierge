@@ -3,6 +3,7 @@ package com.nerdblistersteam.concierge.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class Room {
 
     @NonNull
     private String name;
+
+    @NotEmpty
+    private int seatNum;
 
     @OneToOne
     @PrimaryKeyJoinColumn
