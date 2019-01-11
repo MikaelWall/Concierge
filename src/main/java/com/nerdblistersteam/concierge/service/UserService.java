@@ -1,5 +1,6 @@
 package com.nerdblistersteam.concierge.service;
 
+import com.nerdblistersteam.concierge.domain.Role;
 import com.nerdblistersteam.concierge.domain.User;
 import com.nerdblistersteam.concierge.repository.UserRepository;
 import org.slf4j.Logger;
@@ -53,9 +54,18 @@ public class UserService {
         }
     }
 
-    public void sendActivationEmail(User user) {
-        mailService.sendActivationEmail(user);
+    public void sendEmail(User user) {
+        for (Role role : user.getRoles()) {
+            if (role.getName().equals("ROLE_ADMIN")) {
+                mailService.sendActivationEmail(user);
+            } else {
+                mailService.sendInvitationEmail(user);
+            }
+        }
     }
+//    public void sendActivationEmail(User user) {
+//        mailService.sendActivationEmail(user);
+//    }
 
     public Optional<User> findByEmailAndActivationCode(String email, String activationCode) {
         return userRepository.findByEmailAndActivationCode(email, activationCode);

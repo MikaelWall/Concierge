@@ -28,7 +28,7 @@ public class MailService {
 
     @Async
     public void sendEmail(String to, String subject, String content, boolean isMultiPart, boolean isHTML) {
-        logger.debug("Sending email...");
+        logger.debug("Skickar mejl...");
 
         MimeMessage mimeMessage = this.javaMailSender.createMimeMessage();
         try {
@@ -57,5 +57,11 @@ public class MailService {
     public void sendActivationEmail(User user) {
         logger.debug("Skickar aktiveringsmejl till '{}'", user.getEmail());
         sendEmailFromTemplate(user, "email/activation", "Concierge aktiveringsmejl");
+    }
+
+    @Async
+    public void sendInvitationEmail(User user) {
+        logger.debug("Skickar inbjudningsmejl till '{}'", user.getEmail());
+        sendEmailFromTemplate(user, "email/invitation", "Inbjudan till Concierge");
     }
 }
