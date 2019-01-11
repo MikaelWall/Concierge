@@ -38,8 +38,8 @@ public class ConciergeController {
     }
 
     @PostMapping("/createroom")
-    public String createNewRoom(@RequestParam String name, @RequestParam String seats, @RequestParam String hdmi, @RequestParam String whiteboard) {
-        Room newRoom = new Room(name);
+    public String createNewRoom(@RequestParam String name, @RequestParam int seats, @RequestParam String hdmi, @RequestParam String whiteboard) {
+        Room newRoom = new Room(name, seats);
         //Description newDescription = new Description(seats);
         roomRepository.save(newRoom);
        // descriptionRepository.save(newDescription);

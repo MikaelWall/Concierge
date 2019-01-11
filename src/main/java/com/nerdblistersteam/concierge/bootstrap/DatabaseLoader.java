@@ -1,13 +1,16 @@
 package com.nerdblistersteam.concierge.bootstrap;
 
+import com.nerdblistersteam.concierge.domain.Description;
 import com.nerdblistersteam.concierge.domain.Role;
 import com.nerdblistersteam.concierge.domain.Room;
 import com.nerdblistersteam.concierge.domain.User;
+import com.nerdblistersteam.concierge.repository.DescriptionRepository;
 import com.nerdblistersteam.concierge.repository.RoleRepository;
 import com.nerdblistersteam.concierge.repository.RoomRepository;
 import com.nerdblistersteam.concierge.repository.UserRepository;
 import com.nerdblistersteam.concierge.service.MailService;
 import com.nerdblistersteam.concierge.service.UserService;
+import javassist.runtime.Desc;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -20,15 +23,18 @@ public class DatabaseLoader implements CommandLineRunner {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private RoomRepository roomRepository;
+    private DescriptionRepository descriptionRepository;
     private UserService userService;
 
     private Map<String, User> users = new HashMap<>();
     private List<Room> rooms = new ArrayList<>();
+    private Set<Description> descriptions = new HashSet<>();
 
-    public DatabaseLoader(UserRepository userRepository, RoleRepository roleRepository, RoomRepository roomRepository, UserService userService) {
+    public DatabaseLoader(UserRepository userRepository, RoleRepository roleRepository, RoomRepository roomRepository, DescriptionRepository descriptionRepository, UserService userService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.roomRepository = roomRepository;
+        this.descriptionRepository = descriptionRepository;
         this.userService = userService;
     }
 
@@ -72,19 +78,32 @@ public class DatabaseLoader implements CommandLineRunner {
     }
 
     private void addRooms() {
-        Room larsson = new Room("Larsson");
+
+        Description hdmi = new Description("HDMI");
+        descriptionRepository.save(hdmi);
+        Description whiteboard = new Description("Whiteboard");
+        descriptionRepository.save(whiteboard);
+        Description projector = new Description("Projector");
+        descriptionRepository.save(projector);
+
+        Room larsson = new Room("Larsson", 20);
+        larsson.addDescription(hdmi);
         roomRepository.save(larsson);
         rooms.add(larsson);
 
-        Room heden = new Room("Hedén");
+        Room heden = new Room("Hedén", 21);
+        heden.addDescription(whiteboard);
         roomRepository.save(heden);
         rooms.add(heden);
 
-        Room micael = new Room("Micael");
+        Room micael = new Room("Micael", 20);
+        micael.addDescription(hdmi);
+        micael.addDescription(whiteboard);
         roomRepository.save(micael);
         rooms.add(micael);
 
-        Room lovelace = new Room("Lovelace");
+        Room lovelace = new Room("Lovelace", 8);
+        lovelace.addDescriptions(descriptions);
         roomRepository.save(lovelace);
         rooms.add(lovelace);
     }
