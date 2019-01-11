@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @RequiredArgsConstructor
@@ -36,4 +37,12 @@ public class Room {
             inverseJoinColumns = @JoinColumn(name = "description_id", referencedColumnName = "id")
     )
     private List<Description> descriptions = new ArrayList<>();
+
+    public void addDescription(Description description) {
+        descriptions.add(description);
+    }
+
+    public void addDescriptions(Set<Description> descriptions) {
+        descriptions.forEach(this::addDescription);
+    }
 }
