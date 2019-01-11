@@ -63,12 +63,12 @@ public class DatabaseLoader implements CommandLineRunner {
         users.put("admin@gmail.com", admin);
         userService.sendEmail(admin);
 
-        User master = new User("super@gmail.com", secret, true, "Super", "User");
-        master.addRoles(new HashSet<>(Arrays.asList(userRole, adminRole)));
-        master.setConfirmPassword(secret);
-        userRepository.save(master);
-        users.put("super@gmail.com", master);
-        userService.sendEmail(master);
+        User user2 = new User("user2@gmail.com", secret, true, "Another", "User");
+        user2.addRole(userRole);
+        user2.setConfirmPassword(secret);
+        userRepository.save(user2);
+        users.put("user2@gmail.com", user2);
+        userService.sendEmail(user2);
     }
 
     private void addRooms() {

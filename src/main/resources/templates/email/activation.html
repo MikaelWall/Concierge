@@ -8,7 +8,7 @@
 <body>
 <h1>Välkommen till Concierge!</h1>
 <p th:text="|Hej ${user.getFullName()}!|">Hej Username!</p>
-<p>Tack för att du valt att använda Concierge, det enkla sättet att boka rum! Klicka på länken nedan för att aktivera ditt konto.</p>
+<p>Tack för att du har valt att använda Concierge, det enkla sättet att boka rum! Klicka på länken nedan för att aktivera ditt konto.</p>
 <a th:href="${baseURL} + '/activate/' + ${user.getEmail()} + '/' + ${user.getActivationCode()}">Aktivera konto</a>
 <br>
 <p>Varmt välkommen!</p>
