@@ -9,7 +9,6 @@
           crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href='../../static/css/registrering.css'> <!--Ändra på punkterna-->
     <link rel="stylesheet" type="text/css" href='../../static/css/navbar.css'> <!--Ändra på punkterna-->
-
 </head>
 <body>
 <!-- navbar -->
@@ -41,30 +40,30 @@
     <form class="form-signin" action="register" method="post">
         <!-- <i class="fas fa-gamepad fa-5x"></i> -->
         <h1 class="h3 mb-3 font-weight-normal">Create account</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
+        <label for="email" class="sr-only">Email address</label>
         <input
                 type="email"
-                id="inputEmail"
+                id="email"
                 name="email"
                 class="form-control"
                 placeholder="Email address"
                 required
                 autofocus
         />
-        <label for="inputFirstname" class="sr-only">Förnamn</label>
+        <label for="firstName" class="sr-only">Förnamn</label>
         <input
                 type="text"
-                id="inputFirstname"
+                id="firstName"
                 name="firstName"
                 class="form-control"
                 placeholder="Förnamn"
                 required
                 autofocus
         />
-        <label for="inputLastname" class="sr-only">Efternamn</label>
+        <label for="lastName" class="sr-only">Efternamn</label>
         <input
                 type="text"
-                id="inputLastname"
+                id="lastName"
                 name="lastName"
                 class="form-control"
                 placeholder="Efternamn"
@@ -80,12 +79,12 @@
                 placeholder="Password"
                 required
         />
-        <label for="inputPasswordConfirm" class="sr-only"
+        <label for="confirmPassword" class="sr-only"
         >Confirm password</label
         >
         <input
                 type="password"
-                id="inputPasswordconfirm"
+                id="confirmPassword"
                 name="confirmPassword"
                 class="form-control"
                 placeholder="Confirm password"

@@ -37,6 +37,11 @@ public class AuthController {
         return "/auth/registrering";
     }
 
+    @GetMapping("/createroom")
+    public String createroom() {
+        return "createroom";
+    }
+
     @PostMapping("/register")
     public String registerNewUser(@Valid User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
@@ -56,26 +61,4 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/login")
-    public String postLogin(@RequestParam String username,
-                            @RequestParam String password) throws  Exception {
-
-//        //Nedan är endast test för att kunna se att koppling finns till databasen
-//        Connection conn = DriverManager.getConnection("jdbc:h2:mem:concierge", "sa", "");
-//        System.out.println("Connected to test db");
-//        Statement statement = conn.createStatement();
-//        statement.executeUpdate("INSERT INTO user VALUES (2, null, 'woop@woop.se', TRUE, '" + username +"', 'woop', '" + password + "')");
-//        ResultSet resultSet = statement.executeQuery("SELECT * FROM USER");
-//
-//        while(resultSet.next()) {
-//            System.out.println(resultSet.getInt("id"));
-//            System.out.println(resultSet.getString("email"));
-//            System.out.println(resultSet.getString("password"));
-//
-//        }
-//        conn.close();
-
-        System.out.println("Du har loggat in med: " + username + password);
-        return "/auth/login";
-    }
 }

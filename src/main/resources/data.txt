@@ -45,15 +45,15 @@ VALUES
 
 INSERT INTO USER (ID,ACTIVATION_CODE,EMAIL,ENABLED,FIRST_NAME,LAST_NAME,PASSWORD)
 VALUES
-    ('1', 'tre','a@gmail.com','true','Henrik','A','123'),
-    ('2', 'tre','b@gmail.com','true','Kherota','B','123'),
-    ('3', 'tre','c@gmail.com','true','Björn','C','123'),
-    ('4', 'tre','d@gmail.com','true','Te Hung','D','123'),
-    ('5', 'tre','e@gmail.com','true','Mikael','E','123'),
-    ('6', 'tre','f@gmail.com','false','Yuna','F','123'),
-    ('7', 'tre','g@gmail.com','false','Rikku','G','123'),
-    ('8', 'tre','h@gmail.com','true','Tidus','H','abc'),
-    ('9', 'tre','i@gmail.com','true','Wakka','I','abc');
+    ( 'tre','a@gmail.com','true','Henrik','A','123'),
+    ( 'tre','b@gmail.com','true','Kherota','B','123'),
+    ( 'tre','c@gmail.com','true','Björn','C','123'),
+    ( 'tre','d@gmail.com','true','Te Hung','D','123'),
+    ( 'tre','e@gmail.com','true','Mikael','E','123'),
+    ( 'tre','f@gmail.com','false','Yuna','F','123'),
+    ( 'tre','g@gmail.com','false','Rikku','G','123'),
+    ( 'tre','h@gmail.com','true','Tidus','H','abc'),
+    ( 'tre','i@gmail.com','true','Wakka','I','abc');
 
 
 INSERT INTO USERS_ROLES (USER_ID,ROLE_ID)
