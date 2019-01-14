@@ -1,4 +1,3 @@
-
 html,
 h1,
 h2,
@@ -7,77 +6,84 @@ h4,
 h5,
 h6,
 a {
-  font-family: "Raleway";
+ font-family: "Raleway";
 }
 
 .nav-link,.navbar-brand {
-    color: #690000;
-    cursor: pointer;
+   color: #690000;
+   cursor: pointer;
 }
 
 .nav-link {
-    margin-right: 1em !important;
+   margin-right: 1em !important;
 }
 
 .navbar-collapse {
-    justify-content: flex-end;
+   justify-content: flex-end;
 }
 
 .fa-bars {
-    color: #690000
+   color: #690000
 }
 
 
 .header {
-    background-image: url('../../static/img/pexels-photo-207715.jpeg');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
+   background-image: url('../img/pexels-photo-509922.jpeg');
+   background-attachment: fixed;
+   background-size: cover;
+   background-position: center;
 }
 
 /* .overlay{
-    position: absolute;
-    min-height: 100%;
-    min-width: 100%;
-    left: 0;
-    top: 0;
-    background: rgba(244, 244, 244, 0.79); 
-   }*/
+   position: absolute;
+   min-height: 100%;
+   min-width: 100%;
+   left: 0;
+   top: 0;
+   background: rgba(244, 244, 244, 0.79);
+  }*/
 
 .description {
-    position: absolute;
-    top: 30%;
-    margin: auto;
-    padding: 2em;
+   position: absolute;
+   top: 30%;
+   margin: auto;
+   padding: 2em;
 }
 
 .description h1 {
-    color: #690000;
+   color: #690000;
 }
 
 .description p {
-    color: #666;
-    font-size: 20px;
-    width: 50%;
-    line-height: 1.5;
+   color: #666;
+   font-size: 20px;
+   width: 50%;
+   line-height: 1.5;
 }
 
 .description button {
-    border: 1px solid #690000;
-    background: #690000;
-    color: #fff;
+   border: 1px solid #690000;
+   background: #690000;
+   color: #fff;
 }
 
 .registeringsbutton{
-   border: 1px solid #690000;
-    background: #690000;
-    color: #fff;
-    margin:0 auto;
-    margin-left:auto;
-    margin-right:auto;
-    display:block;
-    margin-top:10%;
-    margin-bottom:0%;
-  
-} 
-  
+  border: 1px solid #690000;
+   background: #690000;
+   color: #fff;
+   margin:0 auto;
+   margin-left:auto;
+   margin-right:auto;
+   display:block;
+   margin-top:10%;
+   margin-bottom:0%;
+
+}
+
+.navbar-brand:hover{
+    color: rgba(179, 179, 179, 0.733);
+}
+
+.nav-link:hover{
+    color: rgba(179, 179, 179, 0.733);
+}
