@@ -30,11 +30,21 @@ public class AuthController {
 
     @GetMapping("login")
     public String login() {
-        return "auth/login";
+        return "auth/Loggin";
     }
     @GetMapping("/register")
     public String registrering() {
-        return "/auth/registrering";
+        return "/auth/Registrera";
+    }
+
+    @GetMapping("/forgottenpassword")
+    public String forgottenPassword() {
+        return "/auth/Glömtlösenord";
+    }
+
+    @GetMapping("/profile")
+    public String profile(){
+        return "/auth/ProfilSida";
     }
 
     @PostMapping("/register")
@@ -45,7 +55,7 @@ public class AuthController {
             model.addAttribute("user", user);
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             System.out.println(bindingResult.getAllErrors());
-            return "auth/registrering";
+            return "auth/Registrera";
         } else {
             // register new user
             User newUser = userService.register(user);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,30 +8,30 @@
     <title>Registrera</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="registrera.css">
+    <link rel="stylesheet" type="text/css" th:href='@{/css/registrera.css}'>
 
 </head>
                 
 <body>
     <div class="container text-center">
-        <form class="form-signin">
+        <form class="form-signin" action="register" method="post">
             <!-- <i class="fas fa-gamepad fa-5x"></i> -->
             <h1 class="h3 mb-3 font-weight-normal">Skapa ett konto</h1>
 
             <label for="firstname" class="sr-only">Förnamn</label>
-            <input type="text" id="firstname" class="form-control" placeholder="Förnamn" required autofocus />
+            <input type="text" id="firstname" name="firstName" class="form-control" placeholder="Förnamn" required autofocus />
 
             <label for="lastname" class="sr-only">Efternamn</label>
-            <input type="text" id="lasttname" class="form-control" placeholder="Efternamn" required autofocus />
+            <input type="text" id="lastname" name="lastName" class="form-control" placeholder="Efternamn" required autofocus />
             
-            <label for="email" class="sr-only">Email adress</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email adress" required autofocus />
+            <label for="inputEmail" class="sr-only">Email adress</label>
+            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email adress" required autofocus />
             
             <label for="inputPassword" class="sr-only">Lösenord</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="lösenord" required />
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="lösenord" required />
             
             <label for="inputPasswordConfirm" class="sr-only">Bekräfta lösenord</label>
-            <input type="password" id="inputPasswordConfirm" class="form-control" placeholder="Bekräfta lösenord"required />
+            <input type="password" id="inputPasswordConfirm" name="confirmPassword" class="form-control" placeholder="Bekräfta lösenord"required />
             
             <p>Har du redan ett konto? <a href="Loggin.html">logga in</a></p>
             <button class="btn btn-lg button btn-block" type="submit">Skapa ett konto</button>
