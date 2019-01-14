@@ -42,7 +42,7 @@ public class ConciergeController {
         Room newRoom = new Room(name, seats);
         //Description newDescription = new Description(seats);
         roomRepository.save(newRoom);
-       // descriptionRepository.save(newDescription);
+        // descriptionRepository.save(newDescription);
         System.out.println("Skapat rum " + name);
         return "index";
     }
