@@ -1,131 +1,83 @@
 
-/*header style*/
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  font-family: "Raleway";
+}
 
-.header{
+.nav-link,.navbar-brand {
+    color: #690000;
+    cursor: pointer;
+}
 
+.nav-link {
+    margin-right: 1em !important;
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.fa-bars {
+    color: #690000
+}
+
+
+.header {
+    background-image: url('./img/pexels-photo-509922.jpeg');
     background-attachment: fixed;
-
     background-size: cover;
-
     background-position: center;
+}
 
-   }
-
-   .overlay{
-
+/* .overlay{
     position: absolute;
-
     min-height: 100%;
-
     min-width: 100%;
-
     left: 0;
-
     top: 0;
+    background: rgba(244, 244, 244, 0.79); 
+   }*/
 
-    background: rgba(244, 244, 244, 0.79);
-
-   }
-
-   .description{
-
+.description {
     position: absolute;
-
     top: 30%;
-
     margin: auto;
-
     padding: 2em;
-
 }
 
-.description h1{
-
- color:#ad2044 ;
-
+.description h1 {
+    color: #690000;
 }
 
-.description p{
-
- color:#666;
-
- font-size: 20px;
-
- width: 50%;
-
- line-height: 1.5;
-
+.description p {
+    color: #666;
+    font-size: 20px;
+    width: 50%;
+    line-height: 1.5;
 }
 
-.description button{
-
- border:1px  solid #ad2044;
-
- background:#ad2044;
-
- color:#fff;
-
+.description button {
+    border: 1px solid #690000;
+    background: #690000;
+    color: #fff;
 }
 
-.about{
-
-    margin: 4em 0;
-
-    padding: 1em;
-
-    position: relative;
-
-   }
-
-   .about h1{
-
-    color:#ad2044;
-
-    margin: 2em;
-
-   }
-
-   .about img{
-
-    height: 100%;
-
-       width: 100%;
-
-       border-radius: 50%
-
-   }
-
-   .about span{
-
-    display: block;
-
-    color: #888;
-
-    position: absolute;
-
-    left: 115px;
-
-   }
-
-   .about .desc{
-
-    padding: 2em;
-
-    border-left:4px solid #10828C;
-
-   }
-
-   .about .desc h3{
-
-    color: #10828C;
-
-   }
-
-   .about .desc p{
-
-    line-height:2;
-
-    color:#888;
-
-   }
-
+.registeringsbutton{
+   border: 1px solid #690000;
+    background: #690000;
+    color: #fff;
+    margin:0 auto;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+    margin-top:10%;
+    margin-bottom:0%;
+  
+} 
+  
