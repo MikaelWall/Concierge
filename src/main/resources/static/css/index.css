@@ -79,3 +79,11 @@ a {
    margin-bottom:0%;
 
 }
+
+.navbar-brand:hover{
+    color: rgba(179, 179, 179, 0.733);
+}
+
+.nav-link:hover{
+    color: rgba(179, 179, 179, 0.733);
+}
