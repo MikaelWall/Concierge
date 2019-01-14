@@ -41,6 +41,9 @@ public class UserService {
     public List<User> findByFirstName(String name) {
         return userRepository.findByFirstName(name);
     }
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
 
     public User save(User user) {
         return userRepository.save(user);
@@ -63,9 +66,10 @@ public class UserService {
             }
         }
     }
-//    public void sendActivationEmail(User user) {
-//        mailService.sendActivationEmail(user);
-//    }
+
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
     public Optional<User> findByEmailAndActivationCode(String email, String activationCode) {
         return userRepository.findByEmailAndActivationCode(email, activationCode);
