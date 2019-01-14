@@ -54,7 +54,7 @@ public class AuthController {
             return "auth/registrering";
         } else {
             // register new user
-            User newUser = userService.register(user);
+            User newUser = userService.registerAdmin(user);
             redirectAttributes
                     .addAttribute("id", newUser.getId())
                     .addFlashAttribute("success", true);
@@ -91,7 +91,6 @@ public class AuthController {
         if (user.isPresent()) {
             User newUser = user.get();
             newUser.setEnabled(true);
-            newUser.addRole(adminRole);
             newUser.setConfirmPassword(newUser.getPassword());
             userService.save(newUser);
             return "auth/activated";

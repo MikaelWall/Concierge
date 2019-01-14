@@ -55,15 +55,12 @@ public class DatabaseLoader implements CommandLineRunner {
         user.setAddedByFullName("Te Hung Tseng");
         userRepository.save(user);
         users.put("user@gmail.com", user);
-        userService.sendEmail(user);
 
-        User admin = new User("admin@gmail.com", secret, false, "Te Hung", "Tseng");
+        User admin = new User("admin@gmail.com", secret, true, "Te Hung", "Tseng");
         admin.addRole(adminRole);
         admin.setConfirmPassword(secret);
-        user.setActivationCode(UUID.randomUUID().toString());
         userRepository.save(admin);
         users.put("admin@gmail.com", admin);
-        userService.sendEmail(admin);
 
         User user2 = new User("user2@gmail.com", secret, true, "Björn", "Persson");
         user2.addRole(userRole);
@@ -71,7 +68,6 @@ public class DatabaseLoader implements CommandLineRunner {
         user2.setAddedByFullName("Te Hung Tseng");
         userRepository.save(user2);
         users.put("user2@gmail.com", user2);
-        userService.sendEmail(user2);
     }
 
     private void addRooms() {

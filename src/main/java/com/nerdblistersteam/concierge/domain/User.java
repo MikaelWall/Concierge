@@ -78,9 +78,9 @@ public class User implements UserDetails {
         roles.add(role);
     }
 
-    public void addRoles(Set<Role> roles) {
-        roles.forEach(this::addRole);
-    }
+//    public void addRoles(Set<Role> roles) {
+//        roles.forEach(this::addRole);
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

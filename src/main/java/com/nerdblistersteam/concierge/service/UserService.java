@@ -29,11 +29,11 @@ public class UserService {
         encoder = new BCryptPasswordEncoder();
     }
 
-    public User register(User user) {
+    public User registerAdmin(User user) {
         String secret = "{bcrypt}" + encoder.encode(user.getPassword());
         user.setPassword(secret);
         user.setConfirmPassword(secret);
-        user.addRole(roleService.findByName("ROLE_USER"));
+        user.addRole(roleService.findByName("ROLE_ADMIN"));
         user.setActivationCode(UUID.randomUUID().toString());
         user.setEnabled(false);
         save(user);
