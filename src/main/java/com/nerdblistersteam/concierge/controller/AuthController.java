@@ -37,8 +37,8 @@ public class AuthController {
         return "/auth/Registrera";
     }
 
-    @GetMapping("/forgottenpassword")
-    public String forgottenPassword() {
+    @GetMapping("/fpassword")
+    public String fPassword() {
         return "/auth/Glömtlösenord";
     }
 

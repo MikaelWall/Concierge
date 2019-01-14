@@ -7,11 +7,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Om oss</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" th:href="{/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'>
 
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg fixed-top bg-navy ">
+    <a class="navbar-brand" href="#">Hem</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-4">
+            <li class="nav-item">
+                <a class="nav-link" data-value="om oss" href="Omoss.html">Om oss</a> </li>
+            <li class="nav-item">
+                <a class="nav-link " data-value="logg in" href="Loggin.html">Logg in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " data-value="registrera" href="Registrera.html">Registrera</a> </li>
+            <li class="nav-item">
+                <a class="nav-link " data-value="team" href="Team.html"> Team</a> </li>
+            <li class="nav-item">
+                <a class="nav-link " data-value="kontakt" href="Kontakt.html">Kontakt</a> </li>
+        </ul>
+    </div>
+</nav>
         <div class="about" id="about">
                 <h1 class="text-center">Om oss</h1>
                 <div class="row">
@@ -47,7 +70,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src='main.js'></script>
+        <script type="text/javascript" th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

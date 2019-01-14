@@ -38,6 +38,11 @@ public class ConciergeController {
         return "calendar";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "Omoss";
+    }
+
     @PostMapping("/createroom")
     public String createNewRoom(@RequestParam String name, @RequestParam int seats) {
         Room newRoom = new Room(name, seats);
