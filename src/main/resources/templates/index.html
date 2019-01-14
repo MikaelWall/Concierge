@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href='../static/css/index.css'> <!--Ändra på punkterna-->
-    <link rel="stylesheet" type="text/css" href='../static/css/navbar.css'> <!--Ändra på punkterna-->
+    <link rel="stylesheet" type="text/css" th:href='@{/css/index.css}'> <!--Ändra på punkterna-->
+    <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'> <!--Ändra på punkterna-->
 
 </head>
 
