@@ -42,7 +42,7 @@ public class DatabaseLoader implements CommandLineRunner {
     public void run(String... args) {
 
         addUsersAndRoles();
-        addRooms();
+        addRoomsAndDescriptions();
 
     }
 
@@ -77,28 +77,30 @@ public class DatabaseLoader implements CommandLineRunner {
         userService.sendEmail(user2);
     }
 
-    private void addRooms() {
+    private void addRoomsAndDescriptions() {
 
         Description hdmi = new Description("HDMI");
         descriptionRepository.save(hdmi);
+        descriptions.add(hdmi);
         Description whiteboard = new Description("Whiteboard");
         descriptionRepository.save(whiteboard);
+        descriptions.add(whiteboard);
         Description projector = new Description("Projector");
         descriptionRepository.save(projector);
+        descriptions.add(projector);
 
         Room larsson = new Room("Larsson", 20);
-        larsson.addDescription(hdmi);
+        larsson.addDescriptions(descriptions);
         roomRepository.save(larsson);
         rooms.add(larsson);
 
         Room heden = new Room("Hedén", 21);
-        heden.addDescription(whiteboard);
+        heden.addDescriptions(descriptions);
         roomRepository.save(heden);
         rooms.add(heden);
 
         Room micael = new Room("Micael", 20);
-        micael.addDescription(hdmi);
-        micael.addDescription(whiteboard);
+        micael.addDescriptions(descriptions);
         roomRepository.save(micael);
         rooms.add(micael);
 
