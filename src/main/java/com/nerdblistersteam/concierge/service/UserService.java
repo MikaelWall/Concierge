@@ -41,13 +41,21 @@ public class UserService {
         return admin;
     }
 
+    public User inviteUser(User user) {
+        user.addRole(roleService.findByName("ROLE_USER"));
+        user.setActivationCode(UUID.randomUUID().toString());
+        user.setEnabled(true);
+        save(user);
+        return user;
+    }
+
     public User registerUser(User user) {
         String secret = "{bcrypt}" + encoder.encode(user.getPassword());
         user.setPassword(secret);
         user.setConfirmPassword(secret);
         user.addRole(roleService.findByName("ROLE_USER"));
         user.setActivationCode(UUID.randomUUID().toString());
-        user.setEnabled(false);
+        user.setEnabled(true);
         save(user);
         return user;
     }

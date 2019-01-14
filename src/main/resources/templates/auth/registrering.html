@@ -41,6 +41,15 @@
     <form class="form-signin" action="register" method="post">
         <!-- <i class="fas fa-gamepad fa-5x"></i> -->
         <h1 class="h3 mb-3 font-weight-normal">Create account</h1>
+        <label for="addedByFullName" class="sr-only">Added By</label>
+        <input
+                type="text"
+                id="addedByFullName"
+                name="addedByFullName"
+                class="form-control"
+                value="Henrik"
+                hidden
+        />
         <label for="inputEmail" class="sr-only">Email address</label>
         <input
                 type="email"
@@ -48,8 +57,10 @@
                 name="email"
                 class="form-control"
                 placeholder="Email address"
+                th:value="${email}"
                 required
                 autofocus
+                th:disabled="${disabled}"
         />
         <label for="inputFirstname" class="sr-only">Förnamn</label>
         <input
@@ -58,8 +69,10 @@
                 name="firstName"
                 class="form-control"
                 placeholder="Förnamn"
+                th:value="${firstName}"
                 required
                 autofocus
+                th:disabled="${disabled}"
         />
         <label for="inputLastname" class="sr-only">Efternamn</label>
         <input
@@ -68,8 +81,10 @@
                 name="lastName"
                 class="form-control"
                 placeholder="Efternamn"
+                th:value="${lastName}"
                 required
                 autofocus
+                th:disabled="${disabled}"
         />
         <label for="inputPassword" class="sr-only">Password</label>
         <input

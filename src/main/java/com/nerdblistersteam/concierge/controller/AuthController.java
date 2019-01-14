@@ -38,6 +38,7 @@ public class AuthController {
     public String login() {
         return "auth/login";
     }
+
     @GetMapping("/register")
     public String registrering() {
         return "/auth/registrering";
@@ -51,7 +52,7 @@ public class AuthController {
             model.addAttribute("user", user);
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             System.out.println(bindingResult.getAllErrors());
-            return "auth/registrering";
+            return "redirect:/register";
         } else {
             // register new user
             User newUser = userService.registerAdmin(user);
@@ -99,25 +100,39 @@ public class AuthController {
     }
 
     @GetMapping("/register/{addedBy}/{email}/{activationCode}")
-    public String activateUser(Model model, @PathVariable String email, @PathVariable String addedBy, @PathVariable String activationCode, RedirectAttributes redirectAttributes) {
+    public String activateUserLink(Model model, @PathVariable String email, @PathVariable String addedBy, @PathVariable String activationCode) {
         Optional<User> user = userService.findByEmailAndActivationCode(email, activationCode);
         if (user.isPresent()) {
             User newUser = user.get();
-//            model.addAttribute("email", email);
-//            model.addAttribute("firstName", newUser.getFirstName());
-//            model.addAttribute("lastName", newUser.getLastName());
-//            newUser.setEnabled(true);
             newUser.setAddedByFullName(addedBy);
-//            newUser.addRole(userRole);
-//            newUser.setConfirmPassword(newUser.getPassword());
-//            userService.save(newUser);
-            redirectAttributes
+            userService.save(newUser);
+            model
                     .addAttribute("email", email)
                     .addAttribute("firstName", newUser.getFirstName())
                     .addAttribute("lastName", newUser.getLastName())
-                    .addAttribute("activationCode", activationCode);
-            return "redirect:/register_user";
+                    .addAttribute("activationCode", activationCode)
+                    .addAttribute("disabled", "disabled");
+            return "/auth/registrering";
         }
         return "redirect:/";
+    }
+
+    @PostMapping("/register/{addedBy}/{email}/{activationCode}")
+    public String activateUser(@Valid User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            // show validation errors
+            logger.info("Validation errors were found while registering a new user.");
+            model.addAttribute("user", user);
+            model.addAttribute("validationErrors", bindingResult.getAllErrors());
+            System.out.println(bindingResult.getAllErrors());
+            return "redirect:/register";
+        } else {
+            // register new user
+            User newUser = userService.registerUser(user);
+            redirectAttributes
+                    .addAttribute("id", newUser.getId())
+                    .addFlashAttribute("success", true);
+            return "redirect:/register";
+        }
     }
 }
