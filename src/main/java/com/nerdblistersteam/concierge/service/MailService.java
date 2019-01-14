@@ -19,7 +19,7 @@ public class MailService {
     private Logger logger = LoggerFactory.getLogger(MailService.class);
     private final SpringTemplateEngine templateEngine;
     private final JavaMailSender javaMailSender;
-    private final String BASE_URL = "https://localhost:8080";
+    private final String BASE_URL = "http://localhost:8080";
 
     public MailService(SpringTemplateEngine templateEngine, JavaMailSender javaMailSender) {
         this.templateEngine = templateEngine;

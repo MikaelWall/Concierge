@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -33,8 +34,10 @@ public class UserService {
         user.setPassword(secret);
         user.setConfirmPassword(secret);
         user.addRole(roleService.findByName("ROLE_USER"));
-        user.setEnabled(true);
+        user.setActivationCode(UUID.randomUUID().toString());
+        user.setEnabled(false);
         save(user);
+        sendEmail(user);
         return user;
     }
 

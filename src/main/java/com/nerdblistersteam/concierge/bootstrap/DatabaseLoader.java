@@ -57,9 +57,10 @@ public class DatabaseLoader implements CommandLineRunner {
         users.put("user@gmail.com", user);
         userService.sendEmail(user);
 
-        User admin = new User("admin@gmail.com", secret, true, "Te Hung", "Tseng");
+        User admin = new User("admin@gmail.com", secret, false, "Te Hung", "Tseng");
         admin.addRole(adminRole);
         admin.setConfirmPassword(secret);
+        user.setActivationCode(UUID.randomUUID().toString());
         userRepository.save(admin);
         users.put("admin@gmail.com", admin);
         userService.sendEmail(admin);

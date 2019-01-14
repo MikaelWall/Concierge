@@ -1,5 +1,6 @@
 package com.nerdblistersteam.concierge.controller;
 
+import com.nerdblistersteam.concierge.domain.Role;
 import com.nerdblistersteam.concierge.domain.User;
 import com.nerdblistersteam.concierge.service.UserService;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,6 +19,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Optional;
 
 @Controller
 public class AuthController {
@@ -27,6 +30,9 @@ public class AuthController {
     public AuthController(UserService userService) {
         this.userService = userService;
     }
+
+    private final Role adminRole = new Role("ROLE_ADMIN");
+    private final Role userRole = new Role("ROLE_USER");
 
     @GetMapping("login")
     public String login() {
@@ -77,5 +83,37 @@ public class AuthController {
 
         System.out.println("Du har loggat in med: " + username + password);
         return "/auth/login";
+    }
+
+    @GetMapping("/activate/{email}/{activationCode}")
+    public String activateAdmin(@PathVariable String email, @PathVariable String activationCode) {
+        Optional<User> user = userService.findByEmailAndActivationCode(email, activationCode);
+        if (user.isPresent()) {
+            User newUser = user.get();
+            newUser.setEnabled(true);
+            newUser.addRole(adminRole);
+            newUser.setConfirmPassword(newUser.getPassword());
+            userService.save(newUser);
+            return "auth/activated";
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/activate/{addedBy}/{email}/{activationCode}")
+    public String activateUser(Model model, @PathVariable String email, @PathVariable String addedBy, @PathVariable String activationCode) {
+        Optional<User> user = userService.findByEmailAndActivationCode(email, activationCode);
+        if (user.isPresent()) {
+            User newUser = user.get();
+            model.addAttribute("email", email);
+            model.addAttribute("firstName", newUser.getFirstName());
+            model.addAttribute("lastName", newUser.getLastName());
+            newUser.setEnabled(true);
+            newUser.setAddedByFullName(addedBy);
+            newUser.addRole(userRole);
+//            newUser.setConfirmPassword(newUser.getPassword());
+            userService.save(newUser);
+            return "auth/register";
+        }
+        return "redirect:/";
     }
 }
