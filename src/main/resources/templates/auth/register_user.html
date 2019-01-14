@@ -38,7 +38,7 @@
 <!-- navbar -->
 <body>
 <div class="container text-center">
-    <form class="form-signin" action="register" method="post">
+    <form class="form-signin" action="register-user" method="post">
         <!-- <i class="fas fa-gamepad fa-5x"></i> -->
         <h1 class="h3 mb-3 font-weight-normal">Create account</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
@@ -48,8 +48,9 @@
                 name="email"
                 class="form-control"
                 placeholder="Email address"
+                th:value="${email}"
                 required
-                autofocus
+                disabled
         />
         <label for="inputFirstname" class="sr-only">Förnamn</label>
         <input
@@ -58,8 +59,9 @@
                 name="firstName"
                 class="form-control"
                 placeholder="Förnamn"
+                th:value="${firstName}"
                 required
-                autofocus
+                disabled
         />
         <label for="inputLastname" class="sr-only">Efternamn</label>
         <input
@@ -68,8 +70,9 @@
                 name="lastName"
                 class="form-control"
                 placeholder="Efternamn"
+                th:value="${lastName}"
                 required
-                autofocus
+                disabled
         />
         <label for="inputPassword" class="sr-only">Password</label>
         <input

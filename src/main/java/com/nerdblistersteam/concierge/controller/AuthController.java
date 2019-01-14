@@ -98,20 +98,25 @@ public class AuthController {
         return "redirect:/";
     }
 
-    @GetMapping("/activate/{addedBy}/{email}/{activationCode}")
-    public String activateUser(Model model, @PathVariable String email, @PathVariable String addedBy, @PathVariable String activationCode) {
+    @GetMapping("/register/{addedBy}/{email}/{activationCode}")
+    public String activateUser(Model model, @PathVariable String email, @PathVariable String addedBy, @PathVariable String activationCode, RedirectAttributes redirectAttributes) {
         Optional<User> user = userService.findByEmailAndActivationCode(email, activationCode);
         if (user.isPresent()) {
             User newUser = user.get();
-            model.addAttribute("email", email);
-            model.addAttribute("firstName", newUser.getFirstName());
-            model.addAttribute("lastName", newUser.getLastName());
-            newUser.setEnabled(true);
+//            model.addAttribute("email", email);
+//            model.addAttribute("firstName", newUser.getFirstName());
+//            model.addAttribute("lastName", newUser.getLastName());
+//            newUser.setEnabled(true);
             newUser.setAddedByFullName(addedBy);
-            newUser.addRole(userRole);
+//            newUser.addRole(userRole);
 //            newUser.setConfirmPassword(newUser.getPassword());
-            userService.save(newUser);
-            return "auth/register";
+//            userService.save(newUser);
+            redirectAttributes
+                    .addAttribute("email", email)
+                    .addAttribute("firstName", newUser.getFirstName())
+                    .addAttribute("lastName", newUser.getLastName())
+                    .addAttribute("activationCode", activationCode);
+            return "redirect:/register_user";
         }
         return "redirect:/";
     }
