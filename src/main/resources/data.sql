@@ -1,1 +1,0 @@
-INSERT INTO user VALUES (1, null, 'apa@apa.se', true, 'apa', 'apa', '123')
