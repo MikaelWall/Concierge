@@ -12,24 +12,12 @@
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/rebecca" type="text/css"/>
 
     <link rel="stylesheet" type="text/css" th:href='@{/css/createroom.css}'>
-    <!--Ändra på punkterna-->
     <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'>
-    <!--Ändra på punkterna-->
 
 </head>
 
 <body>
-
-<header class="header">
-
-</header>
-
-<!-- navbar -->
-
-<div class="description">
-
-    <h1>Skapa ett rum!</h1>
-
+<div class="container text-center">
     <div class="container">
 
         <div class="alert alert-success" role="alert" th:if="${success}">
@@ -42,6 +30,7 @@
     </div>
 
     <form class="form-createroom" action="createroom" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Skapa ett rum!</h1>
         Namn på rummet:<br>
         <label for="roomname" class="sr-only">name</label>
         <input
@@ -73,45 +62,29 @@
 
         <input class="myButton" type="submit" value="Skapa rum">
     </form>
-</div>
 
-<div class="delete">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Alla rum</th>
+                <th scope="col"></th>
 
-    <h1>Ta bort ett rum!</h1>
-
-    <form class="form-deleteroom" action="deleteroom" method="post">
-        Namn på rummet som ska tas bort:<br>
-        <label for="deleteroomname" class="sr-only">name</label>
-        <input
-                type="text"
-                id="deleteroomname"
-                name="deleteName"
-                class="form-control"
-                placeholder="Room name to delete"
-                required
-                autofocus
-        /><br><br>
-
-        <input class="myButton" type="submit" value="deleteroom">
-    </form>
-</div>
-
-<div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Rumsnamn</th>
-            <th scope="col"></th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="room : ${rooms}">
-            <td th:text="${room.name}"></td>
-            <td></td>
-        </tr>
-        </tbody>
-    </table>
+            </tr>
+            </thead>
+            <tbody>
+            <form class="form-deleteroom" action="deleteroom" method="post">
+                <tr th:each="room : ${rooms}">
+                    <td th:text="${room.name}"></td>
+                    <td>
+                        <button th:value="${room.name}" name="deleteName" class="btn btn-danger" type="submit">X
+                        </button>
+                    </td>
+                </tr>
+            </form>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <nav class="navbar navbar-expand-lg fixed-top ">
