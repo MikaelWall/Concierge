@@ -16,6 +16,7 @@ a {
 
 .nav-link {
    margin-right: 1em !important;
+   font-family: 'Montserrat', sans-serif;
 }
 
 .navbar-collapse {
@@ -25,6 +26,8 @@ a {
 .fa-bars {
    color: #690000
 }
+
+.nav-item
 
 
 .header {
@@ -48,6 +51,7 @@ a {
    top: 30%;
    margin: auto;
    padding: 2em;
+   font-family: 'Montserrat', sans-serif;
 }
 
 .description h1 {
@@ -91,4 +95,9 @@ a {
 .greatv{
    font-family: 'Great Vibes'; 
    font-size: 35px;
+}
+
+.greatv-big{
+   font-family: 'Great Vibes'; 
+   font-size: 6rem;
 }
