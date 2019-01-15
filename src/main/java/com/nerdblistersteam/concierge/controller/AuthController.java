@@ -32,6 +32,7 @@ public class AuthController {
     public String login() {
         return "auth/Loggin";
     }
+
     @GetMapping("/register")
     public String registrering() {
         return "/auth/Registrera";

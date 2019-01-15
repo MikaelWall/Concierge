@@ -17,5 +17,67 @@
 <body>
     <nav th:replace="~{/navbar :: nav}"></nav>
 
+    <div class="container">
+        <div class="invite-box">
+            <div class="row">
+                <div class="col">
+                    <h2>Bjud in användare</h2>
+                    <small class="text-muted">Använd formuläret nedan för att lägga till användare i inbjudningslistan.</small>
+                </div>
+            </div>
+            <form class="form-add-invite">
+                <div class="row">
+                    <div class="col">
+                        <label for="firstName" class="sr-only">Förnamn</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Förnamn" required>
+                    </div>
+                    <div class="col">
+                        <label for="lastName" class="sr-only">Efternamn</label>
+                        <input type="text" id="lastName" name="firstName" class="form-control" placeholder="Efternamn" required>
+                    </div>
+                    <div class="col-3 form-check text-center">
+                        <input type="checkbox" id="isAdmin" name="isAdmin" class="form-check-input" data-toggle="tooltip" title="Ge användare admin-rättigheter">
+                        <label for="isAdmin" class="form-check-label">Admin</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="email" class="sr-only">email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="exempel@email.com" required>
+                    </div>
+                    <div class="col-3 text-center">
+                        <button type="submit" class="btn btn-block btn-add-invite">Lägg till</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="invite-list">
+            <div class="row">
+                <div class="col">
+                    <h2>Inbjudningslista</h2>
+                    <small class="text-muted">Klicka på 'Bjud in' för skicka inbjudan.</small>
+                </div>
+            </div>
+            <table class="table table-sm table-hover table-striped table-invite">
+                <tbody>
+                    <tr>
+                        <td>Anders And</td>
+                        <td>test@gmail.com</td>
+                        <td class="text-right"><button type="submit" class="btn btn-remove-user">X</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <form class="form-send-invite">
+                <button type="submit" class="btn btn-block btn-send-invite">Bjud in</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
 </body>
 </html>
