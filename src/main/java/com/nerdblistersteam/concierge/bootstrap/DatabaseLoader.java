@@ -1,20 +1,19 @@
 package com.nerdblistersteam.concierge.bootstrap;
 
-import com.nerdblistersteam.concierge.domain.Description;
-import com.nerdblistersteam.concierge.domain.Role;
-import com.nerdblistersteam.concierge.domain.Room;
-import com.nerdblistersteam.concierge.domain.User;
+import com.nerdblistersteam.concierge.domain.*;
 import com.nerdblistersteam.concierge.repository.DescriptionRepository;
 import com.nerdblistersteam.concierge.repository.RoleRepository;
 import com.nerdblistersteam.concierge.repository.RoomRepository;
 import com.nerdblistersteam.concierge.repository.UserRepository;
 import com.nerdblistersteam.concierge.service.MailService;
+import com.nerdblistersteam.concierge.service.ScheduleService;
 import com.nerdblistersteam.concierge.service.UserService;
 import javassist.runtime.Desc;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Component
@@ -25,17 +24,19 @@ public class DatabaseLoader implements CommandLineRunner {
     private RoomRepository roomRepository;
     private DescriptionRepository descriptionRepository;
     private UserService userService;
+    private ScheduleService scheduleService;
 
     private Map<String, User> users = new HashMap<>();
     private List<Room> rooms = new ArrayList<>();
     private Set<Description> descriptions = new HashSet<>();
 
-    public DatabaseLoader(UserRepository userRepository, RoleRepository roleRepository, RoomRepository roomRepository, DescriptionRepository descriptionRepository, UserService userService) {
+    public DatabaseLoader(UserRepository userRepository, RoleRepository roleRepository, RoomRepository roomRepository, DescriptionRepository descriptionRepository, UserService userService, ScheduleService scheduleService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.roomRepository = roomRepository;
         this.descriptionRepository = descriptionRepository;
         this.userService = userService;
+        this.scheduleService = scheduleService;
     }
 
     @Override
@@ -43,6 +44,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
         addUsersAndRoles();
         addRoomsAndDescriptions();
+        addSchedules();
 
     }
 
@@ -110,5 +112,14 @@ public class DatabaseLoader implements CommandLineRunner {
         lovelace.addDescriptions(descriptions);
         roomRepository.save(lovelace);
         rooms.add(lovelace);
+    }
+
+    private void addSchedules() {
+        Schedule schedule1 = new Schedule(LocalDateTime.now(), LocalDateTime.of(2019,1,20,20, 0));
+        scheduleService.save(schedule1);
+
+        Schedule schedule2 = new Schedule(LocalDateTime.of(2019,1,15,10, 0), LocalDateTime.of(2019,1,15,20, 0));
+        scheduleService.save(schedule2);
+
     }
 }
