@@ -71,6 +71,9 @@ public class ConciergeController {
         return "redirect:/createroom";
     }
 
-
+    @GetMapping("/invite")
+    public String invite() {
+        return "invite";
+    }
 
 }
