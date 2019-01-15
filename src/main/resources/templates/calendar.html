@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
-    <link rel="stylesheet" type="text/css" th:href='@{/css/index.css}'> <!--Ändra på punkterna-->
-    <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'> <!--Ändra på punkterna-->
+    <link rel="stylesheet" type="text/css" th:href='@{/css/index.css}'>
+    <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'>
 
   <link type="text/css" th:href="@{/lib/fullcalendar.min.css}" rel="stylesheet"/>
   <link type="text/css" th:href="@{/lib/fullcalendar.print.min.css}" rel="stylesheet" media="print"/>
@@ -23,16 +23,7 @@
   <script th:src="@{/lib/fullcalendar.min.js}"></script>
   <script th:src="@{/lib/scheduler.min.js}"></script>
 
-    <!--Gamla original-->
-    <!--<link href='../static/lib/fullcalendar.min.css' rel='stylesheet' />-->
-<!--<link href='../static/lib/fullcalendar.print.min.css' rel='stylesheet' media='print' />-->
-<!--<link href='../static/lib/scheduler.min.css' rel='stylesheet' />-->
-<!--<script src='../static/lib/moment.min.js'></script>-->
-<!--<script src='../static/lib/jquery.min.js'></script>-->
-<!--<script src='../static/lib/fullcalendar.min.js'></script>-->
-<!--<script src='../static/lib/scheduler.min.js'></script>-->
-
-<script>
+<script th:inline="javascript">
 
   $(function() { // document ready
 
@@ -43,6 +34,7 @@
       editable: false,
       selectable: true,
       eventLimit: true, // allow "more" link when too many events
+
 /////////////////////////// onclick
       eventClick: function(calEvent, jsEvent, view) {
 
@@ -113,13 +105,14 @@ eventMouseout: function(calEvent, jsEvent) {
 
       //// uncomment this line to hide the all-day slot
       allDaySlot: false,
-      
+
 
       resources: [
         { id: 'a', title: 'Room A' },
         { id: 'b', title: 'Room B', eventColor: 'green' },
         { id: 'c', title: 'Room C', eventColor: 'orange' },
         { id: 'd', title: 'Room D', eventColor: 'red' }
+
       ],
       events: [
         { id: '1', resourceId: 'a', start: '2019-01-09T09:00:00', end: '2019-01-09T14:00:00', title: 'event 1', url:'https://www.google.com'},
@@ -211,6 +204,8 @@ eventMouseout: function(calEvent, jsEvent) {
 </nav>
 
     <div id='calendar'></div>
+
+<!--<p th:text="${bookings}"></p>-->
 
 
 </body>

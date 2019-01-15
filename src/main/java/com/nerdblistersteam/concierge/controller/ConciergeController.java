@@ -2,6 +2,7 @@ package com.nerdblistersteam.concierge.controller;
 
 import com.nerdblistersteam.concierge.domain.Room;
 import com.nerdblistersteam.concierge.service.RoomService;
+import com.nerdblistersteam.concierge.service.ScheduleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,11 @@ public class ConciergeController {
 
     private final Logger logger = LoggerFactory.getLogger(ConciergeController.class);
     private RoomService roomService;
+    private ScheduleService scheduleService;
 
-    public ConciergeController(RoomService roomService) {
+    public ConciergeController(RoomService roomService, ScheduleService scheduleService) {
         this.roomService = roomService;
+        this.scheduleService = scheduleService;
     }
 
     @GetMapping("/")
@@ -34,7 +37,8 @@ public class ConciergeController {
     }
 
     @GetMapping("/calendar")
-    public String calendar() {
+    public String calendar(Model model) {
+        model.addAttribute("bookings", scheduleService.findAll());
         return "calendar";
     }
 
