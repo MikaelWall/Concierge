@@ -19,6 +19,7 @@ public class ConciergeController {
     private final Logger logger = LoggerFactory.getLogger(ConciergeController.class);
     private RoomService roomService;
     private ScheduleService scheduleService;
+    private String testName = "Larsson";
 
     public ConciergeController(RoomService roomService, ScheduleService scheduleService) {
         this.roomService = roomService;
@@ -45,6 +46,12 @@ public class ConciergeController {
     @GetMapping("/about")
     public String about() {
         return "Omoss";
+    }
+
+    @GetMapping("/room")
+    public String room(Model model) {
+        model.addAttribute( "room", roomService.findByName(testName));
+        return "Rum";
     }
 
     @PostMapping("/createroom")

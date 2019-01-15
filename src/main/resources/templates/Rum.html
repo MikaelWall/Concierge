@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>Create room</title>
+    <title>Rum</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
@@ -29,59 +29,21 @@
         </div>
     </div>
 
-    <form class="form-createroom" action="createroom" method="post">
-        <h1 class="h3 mb-3 font-weight-normal">Skapa ett rum!</h1>
-        Namn på rummet:<br>
-        <label for="roomname" class="sr-only">name</label>
-        <input
-                type="text"
-                id="roomname"
-                name="name"
-                class="form-control"
-                placeholder="Room name"
-                required
-                autofocus
-        /><br><br>
-        Antal platser:<br>
-        <input
-                type="number"
-                name="seats"
-                placeholder="Number of seats"/><br><br>
-        <input
-                type="checkbox"
-                name="hdmi"
-                value="Hdmi">HDMI<br>
-        <input
-                type="checkbox"
-                name="whiteboard"
-                value="Whiteboard">Whiteboard<br>
-        <input
-                type="checkbox"
-                name="projector"
-                value="Projector">Projektor<br><br>
-
-        <input class="myButton" type="submit" value="Skapa rum">
-    </form>
-
     <div>
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Alla rum</th>
+                <th scope="col">Lediga tider</th>
                 <th scope="col"></th>
 
             </tr>
             </thead>
             <tbody>
-            <form class="form-deleteroom" action="deleteroom" method="post">
-                <tr th:each="room : ${rooms}">
-                    <td th:text="${room.name}"></td>
-                    <td>
-                        <button th:value="${room.name}" name="deleteName" class="btn btn-danger" type="submit">X
-                        </button>
-                    </td>
+                <tr th:each="aroom : ${room}">
+                    <td th:text="${aroom.start}"></td>
+                    <td></td>
                 </tr>
-            </form>
+
             </tbody>
         </table>
     </div>
