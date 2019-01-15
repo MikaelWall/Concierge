@@ -1,11 +1,39 @@
-.navbar{ background:#ad2044;}
+a {
+    font-family: "Raleway";
+}
 
-.nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
+.nav-link,
 
-.nav-link{ margin-right: 1em !important;}
+.navbar{
+    color: #690000
+}
 
-.nav-link:hover{ background: #f4f4f4; color: #f97300; }
+.navbar-brand {
+    color: #690000;
+    cursor: pointer;
+}
 
-.navbar-collapse{ justify-content: flex-end;}
+.nav-link {
+    margin-right: 1em !important;
+}
 
-.navbar-toggler{  background:#fff !important;}
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.fa-bars {
+    color: #690000
+}
+
+.navbar-brand:hover {
+    color: rgba(179, 179, 179, 0.733);
+}
+
+.nav-link:hover {
+    color: rgba(179, 179, 179, 0.733);
+}
+
+.greatv {
+    font-family: 'Great Vibes';
+    font-size: 35px;
+}

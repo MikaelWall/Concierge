@@ -1,5 +1,5 @@
 html,
-h1,
+h1
 h2,
 h3,
 h4,
@@ -86,4 +86,9 @@ a {
 
 .nav-link:hover{
     color: rgba(179, 179, 179, 0.733);
+}
+
+.greatv{
+   font-family: 'Great Vibes'; 
+   font-size: 35px;
 }
