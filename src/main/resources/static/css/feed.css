@@ -1,0 +1,14 @@
+.table {
+    border-radius: 5px;
+    width: 65%;
+    margin: 0px auto !important;
+    float: none;
+}
+
+table th{
+    text-align: center; 
+}
+
+span{
+    font-size: 3rem
+}

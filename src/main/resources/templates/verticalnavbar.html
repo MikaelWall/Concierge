@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href='../static/css/verticalnavbar.css'>
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href='@{/css/verticalnavbar.css}'>
 </head>
 
 <body>
-    <div class="vertical-menu vertical-center">
+    <div class="vertical-menu vertical-center" th:fragment="verticalnavigation">
         <a href="#" class="active">Profil</a>
-        <a href="#">Alla rum</a>
-        <a href="#">Kalender</a>
-        <a href="#">Bjud in</a>
-        <a href="#">Skapa/ta bort rum</a>
+        <a href="#rumlista">Alla rum</a>
+        <a href="#kalender">Kalender</a>
+        <a href="#kontakter">Bjud in</a>
+        <a href="#bokningar">Skapa/ta bort</a>
     </div>
 </body>
 

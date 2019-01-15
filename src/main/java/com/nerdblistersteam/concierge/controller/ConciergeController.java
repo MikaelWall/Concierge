@@ -47,6 +47,11 @@ public class ConciergeController {
         return "Omoss";
     }
 
+    @GetMapping("/allrooms")
+    public String allrooms() {
+        return "feed";
+    }
+
     @PostMapping("/createroom")
     public String createNewRoom(@RequestParam String name, @RequestParam int seats) {
         Room newRoom = new Room(name, seats);

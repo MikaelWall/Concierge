@@ -10,14 +10,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'>
-
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-navy ">
-        <a class="navbar-brand greatv" th:href="@{/}">Concierge</a>
+    <nav class="navbar navbar-expand-lg bg-navy" th:fragment="navigation">
+        <a class="navbar-brand" th:href="@{/}">Concierge</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>

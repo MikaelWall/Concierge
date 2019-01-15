@@ -1,9 +1,37 @@
-.navbar{ background:#690000;}
+.vertical-menu {
+    width: 200px;
+    /* Set a width if you like */
+    font-family: 'Montserrat', sans-serif;
+}
 
-.nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
+.vertical-menu a {
+    background-color: white;
+    /* Grey background color */
+    color: black;
+    /* Black text color */
+    display: block;
+    /* Make the links appear below each other */
+    padding: 12px;
+    /* Add some padding */
+    text-decoration: none;
+    /* Remove underline from links */
+}
 
-.nav-link{ margin-right: 1em !important;}
+.vertical-menu a:hover {
+    background-color: #666;
+    /* Dark grey background on mouse-over */
+}
 
-.navbar-collapse{ justify-content: flex-end;}
+.vertical-menu a.active {
+    background-color: #690000;
+    /* Add a green color to the "active/current" link */
+    color: white;
+}
 
-.navbar-toggler{  background:#fff !important;}
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}

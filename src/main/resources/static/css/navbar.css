@@ -1,21 +1,18 @@
-a {
-    font-family: "Raleway";
-}
-
-.nav-link,
-
 .navbar{
-    color: #690000
+    background-color: #690000
 }
 
 .navbar-brand {
-    color: #690000;
+    color: white;
     cursor: pointer;
+    font-family: 'Great Vibes', cursive;
+    font-size: 35px;
 }
 
 .nav-link {
-    margin-right: 1em !important;
+    margin-right: 1em;
     font-family: 'Montserrat', sans-serif;
+    color: white;
 }
 
 .navbar-collapse {
@@ -32,9 +29,4 @@ a {
 
 .nav-link:hover {
     color: rgba(179, 179, 179, 0.733);
-}
-
-.greatv {
-    font-family: 'Great Vibes';
-    font-size: 35px;
 }
