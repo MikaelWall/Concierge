@@ -27,10 +27,6 @@ public class Room {
     @NonNull
     private int seatNum;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Schedule schedule;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "rooms_descriptions",

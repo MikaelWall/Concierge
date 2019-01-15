@@ -36,6 +36,8 @@ public class ConciergeController {
         return "createroom";
     }
 
+
+
     @GetMapping("/calendar")
     public String calendar(Model model) {
         model.addAttribute("bookings", scheduleService.findAll());
@@ -54,7 +56,7 @@ public class ConciergeController {
         roomService.save(newRoom);
        // descriptionRepository.save(newDescription);
         System.out.println("Skapat rum " + name);
-        return "index";
+        return "redirect:/createroom";
     }
 
     @PostMapping("/deleteroom")

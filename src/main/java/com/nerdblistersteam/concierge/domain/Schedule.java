@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @RequiredArgsConstructor
@@ -23,10 +25,18 @@ public class Schedule {
     @NonNull
     private LocalDateTime stop;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    public void addUser(User user) {
+        this.user = user;
+    }
+
+    @OneToOne
     private Room room;
+
+    public void addRoom(Room room) {
+        this.room = room;
+    }
 
 }

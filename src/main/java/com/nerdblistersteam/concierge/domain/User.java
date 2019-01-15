@@ -40,10 +40,6 @@ public class User implements UserDetails {
 
     private String addedByFullName;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Schedule schedule;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",

@@ -1,6 +1,7 @@
 package com.nerdblistersteam.concierge.controller;
 
 import com.nerdblistersteam.concierge.domain.User;
+import com.nerdblistersteam.concierge.service.RoomService;
 import com.nerdblistersteam.concierge.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +24,11 @@ public class AuthController {
 
     private final Logger logger = LoggerFactory.getLogger(AuthController.class);
     private UserService userService;
+    private RoomService roomService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, RoomService roomService) {
         this.userService = userService;
+        this.roomService = roomService;
     }
 
     @GetMapping("login")
@@ -43,7 +46,8 @@ public class AuthController {
     }
 
     @GetMapping("/profile")
-    public String profile(){
+    public String profile(Model model){
+        model.addAttribute("rooms", roomService.findAll());
         return "/auth/ProfilSida";
     }
 

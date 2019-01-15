@@ -27,6 +27,25 @@
     <div class="section">
       <h1><a name="Rumlista">Headline One</a></h1>
       <p>Lorem ipsum dolor sit amet...</p>
+
+      <div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Rumsnamn</th>
+            <th scope="col"></th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="room : ${rooms}">
+            <td th:text="${room.name}"></td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div><br><br><br><br><br><br><br><br><br>
 
     <div class="section">
