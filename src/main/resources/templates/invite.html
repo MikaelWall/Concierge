@@ -21,6 +21,12 @@
         <div class="alert alert-success" role="alert" th:if="${success}">
             Inbjudan har skickats!
         </div>
+        <div class="alert alert-success" role="alert" th:if="${deleted}">
+            Inbjudan har tagits bort från listan.
+        </div>
+        <div class="alert alert-danger" role="alert" th:if="${!deleted}">
+            Något gick fel, försök igen.
+        </div>
         <div class="invite-box">
             <div class="row">
                 <div class="col">
