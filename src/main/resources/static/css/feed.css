@@ -15,4 +15,12 @@ span{
 
 .clickwindow{
     display: inline-block;
-}   
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+tr{
+    border: 2px black solid;
+}
