@@ -123,7 +123,7 @@ public class ConciergeController {
         for (Invited invited : invitedList) {
             invitedService.sendInvitationEmail(invited);
         }
-        redirectAttributes.addAttribute("success", true);
+        redirectAttributes.addFlashAttribute("success", true);
         return "redirect:/invite";
     }
 
