@@ -1,5 +1,6 @@
 package com.nerdblistersteam.concierge.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Room {
 
     @OneToOne
     @PrimaryKeyJoinColumn
+    @JsonIgnore
     private Schedule schedule;
 
     @ManyToMany(fetch = FetchType.EAGER)

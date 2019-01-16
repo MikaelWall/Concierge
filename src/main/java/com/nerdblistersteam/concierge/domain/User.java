@@ -1,5 +1,6 @@
 package com.nerdblistersteam.concierge.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,6 +33,7 @@ public class User implements UserDetails {
 
     @NonNull
     @Column(length = 100)
+    @JsonIgnore
     private String password;
 
     @NonNull
@@ -42,6 +44,7 @@ public class User implements UserDetails {
 
     @OneToOne
     @PrimaryKeyJoinColumn
+    @JsonIgnore
     private Schedule schedule;
 
     @ManyToMany(fetch = FetchType.EAGER)
