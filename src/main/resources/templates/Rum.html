@@ -48,6 +48,16 @@
             </tbody>
         </table>
     </div>
+
+    <div class="container">
+        <form class="form-signin" action="createbooking" method="post">
+            <label for="startTime" class="center"></label>
+            <input type="time" id="startTime" name="start" class="form-control" placeholder="Starttid" required autofocus>
+            <label for="stopTime" class="center"></label>
+            <input type="time" id="stopTime" name="stop" class="form-control" placeholder="Sluttid" required autofocus>
+            <button class="btn btn-lg" type="submit">Boka</button>
+        </form>
+    </div>
 </div>
 
 <nav class="navbar navbar-expand-lg fixed-top ">

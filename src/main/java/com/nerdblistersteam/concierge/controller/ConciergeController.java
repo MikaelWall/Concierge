@@ -3,17 +3,17 @@ package com.nerdblistersteam.concierge.controller;
 import com.nerdblistersteam.concierge.domain.Room;
 import com.nerdblistersteam.concierge.domain.Schedule;
 import com.nerdblistersteam.concierge.domain.Timespann;
+import com.nerdblistersteam.concierge.domain.User;
 import com.nerdblistersteam.concierge.service.RoomService;
 import com.nerdblistersteam.concierge.service.ScheduleService;
+import com.nerdblistersteam.concierge.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLOutput;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -27,12 +27,14 @@ public class ConciergeController {
     private final Logger logger = LoggerFactory.getLogger(ConciergeController.class);
     private RoomService roomService;
     private ScheduleService scheduleService;
+    private UserService userService;
     //Detta är ett test för att kunna skilja rum i "room"
     private String rum = "Larsson";
 
-    public ConciergeController(RoomService roomService, ScheduleService scheduleService) {
+    public ConciergeController(RoomService roomService, ScheduleService scheduleService, UserService userService) {
         this.roomService = roomService;
         this.scheduleService = scheduleService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -64,6 +66,14 @@ public class ConciergeController {
         return "feed";
     }
 
+    @GetMapping("/api/schedule")
+    public @ResponseBody
+    List<Schedule> getSchedule() {
+        return scheduleService.findAll();
+    }
+
+    //Denna funktion tar ett värde från allrooms och visar sedan lediga och bokade tider för rummet.
+    //Koden bör inte ligga här, kanske bättre placering i RoomService.
     @GetMapping("/{name}")
     public String room(@PathVariable String name,Model model) {
 
@@ -127,6 +137,28 @@ public class ConciergeController {
         model.addAttribute( "times", free);
         model.addAttribute("bookings", freeAndBooked);
         return "Rum";
+    }
+
+    //Skapar bokning för ett specifikt rum och visar bokade och lediga tider. Just nu kan man bara boka den dag som dagens datum.
+    //Här ska koppling göras till användare och rum, då det nu är hårdkodat.
+    @PostMapping("/createbooking")
+    public String createNewBooking(HttpServletRequest request, @RequestParam LocalTime start, @RequestParam LocalTime stop) {
+
+        Timespann createdBooking = new Timespann(LocalDate.now().atTime(start), LocalDate.now().atTime(stop), true);
+        User user1 = userService.findById(3L).get();
+        Room room1 = roomService.findByName("Larsson").get();
+        System.out.println(createdBooking.getStart());
+        System.out.println(createdBooking.getStop());
+        Schedule add = new Schedule(createdBooking.getStart(), createdBooking.getStop());
+        System.out.println(add.getStart());
+        System.out.println(add.getStop());
+        add.addUser(user1);
+        add.addRoom(room1);
+
+        scheduleService.save(add);
+
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
     }
 
     @PostMapping("/createroom")
