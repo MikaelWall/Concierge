@@ -29,6 +29,7 @@ public class User implements UserDetails {
     @NonNull
     @Size(min = 8, max = 20)
     @Column(nullable = false, unique = true)
+    @JsonIgnore
     private String email;
 
     @NonNull
@@ -38,6 +39,7 @@ public class User implements UserDetails {
 
     @NonNull
     @Column(nullable = false)
+    @JsonIgnore
     private boolean enabled;
 
     private String addedByFullName;
@@ -53,6 +55,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
+    @JsonIgnore
     private Set<Role> roles = new HashSet<>();
 
     @NonNull
@@ -68,9 +71,11 @@ public class User implements UserDetails {
     private String fullName;
 
     @Transient
+    @JsonIgnore
     @NotEmpty(message = "Please enter Password Confirmation")
     private String confirmPassword;
 
+    @JsonIgnore
     private String activationCode;
 
     public String getFullName(){
@@ -86,26 +91,31 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
     @Override
+    @JsonIgnore
     public String getUsername() {
         return email;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
