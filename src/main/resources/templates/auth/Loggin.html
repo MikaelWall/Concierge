@@ -15,12 +15,12 @@
 
 <body>
     <div class="container text-center">
-        <form class="form-signin">
+            <form class="form-signin" th:action="@{/login}" method="post">
             <h1 class="h3 mb-3 font-weight-normal">Logga in</h1>
             <label for="userName" class="sr-only">Användanamn</label>
-            <input type="text" id="userName" class="form-control" placeholder="Användarnamn" required autofocus>
+            <input type="text" id="userName" name="email" class="form-control" placeholder="Användarnamn" required autofocus>
             <label for="inputPassword" class="sr-only">Lösenord</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Lösenord" required>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Lösenord" required>
             <p><a th:href="@{/fpassword}">Glömt lösenord?</a> eller <a th:href="@{/register}">Skapa ett konto </a></p>
             <div class="checkbox mb-3">
                 <label>
