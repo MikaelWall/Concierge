@@ -6,6 +6,7 @@ import com.nerdblistersteam.concierge.repository.RoleRepository;
 import com.nerdblistersteam.concierge.repository.RoomRepository;
 import com.nerdblistersteam.concierge.repository.UserRepository;
 import com.nerdblistersteam.concierge.service.MailService;
+import com.nerdblistersteam.concierge.service.RoomService;
 import com.nerdblistersteam.concierge.service.ScheduleService;
 import com.nerdblistersteam.concierge.service.UserService;
 import javassist.runtime.Desc;
@@ -23,6 +24,7 @@ public class DatabaseLoader implements CommandLineRunner {
     private RoleRepository roleRepository;
     private RoomRepository roomRepository;
     private DescriptionRepository descriptionRepository;
+    private RoomService roomService;
     private UserService userService;
     private ScheduleService scheduleService;
 
@@ -30,11 +32,12 @@ public class DatabaseLoader implements CommandLineRunner {
     private List<Room> rooms = new ArrayList<>();
     private Set<Description> descriptions = new HashSet<>();
 
-    public DatabaseLoader(UserRepository userRepository, RoleRepository roleRepository, RoomRepository roomRepository, DescriptionRepository descriptionRepository, UserService userService, ScheduleService scheduleService) {
+    public DatabaseLoader(UserRepository userRepository, RoleRepository roleRepository, RoomRepository roomRepository, DescriptionRepository descriptionRepository, RoomService roomService, UserService userService, ScheduleService scheduleService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.roomRepository = roomRepository;
         this.descriptionRepository = descriptionRepository;
+        this.roomService = roomService;
         this.userService = userService;
         this.scheduleService = scheduleService;
     }
@@ -115,11 +118,28 @@ public class DatabaseLoader implements CommandLineRunner {
     }
 
     private void addSchedules() {
-        Schedule schedule1 = new Schedule(LocalDateTime.now(), LocalDateTime.of(2019,1,20,20, 0));
+        User bookedByUser = userService.findById(3L).get();
+        Room bookedRoom = roomService.findByName("Larsson").get();
+        Schedule schedule1 = new Schedule(LocalDateTime.of(2019, 1, 16, 10, 0), LocalDateTime.of(2019,1,16,12, 0));
+        schedule1.addUser(bookedByUser);
+        schedule1.addRoom(bookedRoom);
         scheduleService.save(schedule1);
 
-        Schedule schedule2 = new Schedule(LocalDateTime.of(2019,1,15,10, 0), LocalDateTime.of(2019,1,15,20, 0));
+        User bookedByUser2 = userService.findById(3L).get();
+        Room bookedRoom2 = roomService.findByName("Larsson").get();
+        Schedule schedule2 = new Schedule(LocalDateTime.of(2019, 1, 16, 15, 0), LocalDateTime.of(2019,1,16,16, 0));
+        schedule2.addUser(bookedByUser2);
+        schedule2.addRoom(bookedRoom2);
         scheduleService.save(schedule2);
-
     }
+
+    private void removeSchedule() {
+        List<Schedule> schedules = scheduleService.findByStop(LocalDateTime.of(2019, 1, 20, 20, 0));
+        if (!schedules.isEmpty()) {
+            scheduleService.delete(schedules.get(0));
+        }
+    }
+
+
+
 }
