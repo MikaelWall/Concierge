@@ -12,3 +12,7 @@ table th{
 span{
     font-size: 3rem
 }
+
+a{
+    display: block; height: 100%;
+}

@@ -29,10 +29,9 @@
                     </thead>
                     <tbody class="text-center">
                         <tr th:each="room : ${rooms}">
-                            <a class="room-link">
-                                <td th:text="${room.name}"></td>
-                            </a>
-                            <td></td>
+                            <td th:text="${room.name}">
+                                <a th:href=${/login}></a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
