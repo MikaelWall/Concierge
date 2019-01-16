@@ -34,4 +34,8 @@ public class ScheduleService {
     public Schedule save(Schedule schedule) {
         return scheduleRepository.save(schedule);
     }
+
+    public void delete(Schedule schedule) {
+        scheduleRepository.delete(schedule);
+    }
 }
