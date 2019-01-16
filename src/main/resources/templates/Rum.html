@@ -51,26 +51,6 @@
         </div>
     </div>
 
-    <div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Bokade tider</th>
-                <th scope="col"></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="book : ${bookings}" class="" th:classappend="${book.isBooked()} ? table-danger : table-success">
-                <td th:text="${book.getStartClock()}"></td>
-                <td th:text="${book.getStopClock()}"></td>
-
-            </tr>
-
-            </tbody>
-        </table>
-    </div>
-
     <div class="container">
         <form class="form-signin" action="createbooking" method="post">
             <label for="startTime" class="center"></label>
