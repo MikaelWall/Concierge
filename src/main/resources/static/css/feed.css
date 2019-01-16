@@ -12,3 +12,7 @@ table th{
 span{
     font-size: 3rem
 }
+
+.clickwindow{
+    display: inline-block;
+}   
