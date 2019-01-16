@@ -43,7 +43,7 @@ public class AuthController {
     }
 
     @GetMapping("/profile")
-    public String profile(){
+    public String profile() {
         return "/auth/ProfilSida";
     }
 

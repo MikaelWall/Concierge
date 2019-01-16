@@ -21,8 +21,7 @@
             <input type="text" id="userName" class="form-control" placeholder="Användarnamn" required autofocus>
             <label for="inputPassword" class="sr-only">Lösenord</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Lösenord" required>
-            <p><a href="../Glömtlösenord.html">Glömt lösenord?</a> eller <a href="../auth/Registrera.html">Skapa ett
-                    konto</a></p>
+            <p><a th:href="@{/fpassword}">Glömt lösenord?</a> eller <a th:href="@{/register}">Skapa ett konto </a></p>
             <div class="checkbox mb-3">
                 <label>
                     <input type="checkbox" value="kom ihåg mig"> Kom ihåg mig
