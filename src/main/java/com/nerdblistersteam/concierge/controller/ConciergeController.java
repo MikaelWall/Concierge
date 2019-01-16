@@ -64,10 +64,9 @@ public class ConciergeController {
         return "feed";
     }
 
-    @GetMapping("/room")
-    public String room(Model model) {
+    @GetMapping("/{name}")
+    public String room(@PathVariable String name,Model model) {
 
-        //@PathVariable String name, [ska införas som parameter]
         //Bokningsfönstret per dag
         LocalDateTime openBooking = LocalDateTime.of(LocalDate.now(), LocalTime.of(6, 0));
         LocalDateTime closeBooking = LocalDateTime.of(LocalDate.now(), LocalTime.of(17, 0));
@@ -79,7 +78,7 @@ public class ConciergeController {
 
 
         for (int i = 0; i < schedulesFromDB.size(); i++) {
-            if (schedulesFromDB.get(i).getRoom().getName().equals(rum) & schedulesFromDB.get(i).getStart().isAfter(openBooking)) {
+            if (schedulesFromDB.get(i).getRoom().getName().equals(name) & schedulesFromDB.get(i).getStart().isAfter(openBooking)) {
                 booked.add(new Timespann(schedulesFromDB.get(i).getStart(), schedulesFromDB.get(i).getStop(), true));
             }
 
