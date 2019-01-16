@@ -24,3 +24,7 @@ body{
 tr{
     border: 2px black solid;
 }
+
+.content{
+    padding-top: 120px;
+}
