@@ -6,19 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Glömt Lösenord</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/loggain.css}">
     <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'>
 
 </head>
 <body>
     <div class="container text-center">
-        <form class="form-email">
+        <form class="form-email text-center">
             <h1 class="h3 mb-3 font-weight-normal">Glömt lösenordet</h1>
             <label for="email" class="sr-only">Email</label>
             <input type="email" id="email" class="form-control" placeholder="namn@exempel.com" required autofocus>
-            <button class="btn btn-lg skickabutton btn-block" type="submit">Skicka email till mig</button>
+            <button class="btn btn-lg loggbutton btn-block" type="submit">Skicka email till mig</button>
 
-            <div class="tillbakalink"> <p><i class="fas fa-chevron-left"></i><a href="../templates/auth/Loggin.html">Tillbaka</a>
+            <div class="tillbakalink"> <p><i class="fas fa-chevron-left"></i><a th:href="@{/login}">Tillbaka</a>
               
             </div>
             <p class="mt-5 mb-3 text-muted">Nerd Blister Team Ltd. &copy; 2019</p>
