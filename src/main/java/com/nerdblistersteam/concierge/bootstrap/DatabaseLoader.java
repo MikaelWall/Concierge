@@ -76,7 +76,6 @@ public class DatabaseLoader implements CommandLineRunner {
         user2.setAddedByFullName("Te Hung Tseng");
         userRepository.save(user2);
         users.put("user2@gmail.com", user2);
-        userService.sendEmail(user2);
     }
 
     private void addRoomsAndDescriptions() {

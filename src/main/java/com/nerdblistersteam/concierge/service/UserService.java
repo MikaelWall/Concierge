@@ -30,7 +30,27 @@ public class UserService {
         encoder = new BCryptPasswordEncoder();
     }
 
-    public User register(User user) {
+    public User registerAdmin(User admin) {
+        String secret = "{bcrypt}" + encoder.encode(admin.getPassword());
+        admin.setPassword(secret);
+        admin.setConfirmPassword(secret);
+        admin.addRole(roleService.findByName("ROLE_ADMIN"));
+        admin.setActivationCode(UUID.randomUUID().toString());
+        admin.setEnabled(false);
+        save(admin);
+        sendEmail(admin);
+        return admin;
+    }
+
+    public User inviteUser(User user) {
+        user.addRole(roleService.findByName("ROLE_USER"));
+        user.setActivationCode(UUID.randomUUID().toString());
+        user.setEnabled(true);
+        save(user);
+        return user;
+    }
+
+    public User registerUser(User user) {
         String secret = "{bcrypt}" + encoder.encode(user.getPassword());
         user.setPassword(secret);
         user.setConfirmPassword(secret);
