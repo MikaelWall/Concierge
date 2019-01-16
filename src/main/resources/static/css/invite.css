@@ -42,6 +42,7 @@
   color: #fff;
 }
 
-.btn-add-invite:hover{
+.btn-add-invite:hover,
+.btn-send-invite:hover {
   background: #666;
 }

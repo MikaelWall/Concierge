@@ -18,6 +18,9 @@
     <nav th:replace="~{/navbar :: nav}"></nav>
 
     <div class="container">
+        <div class="alert alert-success" role="alert" th:if="${success}">
+            Inbjudan har skickats!
+        </div>
         <div class="invite-box">
             <div class="row">
                 <div class="col">
@@ -25,7 +28,7 @@
                     <small class="text-muted">Använd formuläret nedan för att lägga till användare i inbjudningslistan.</small>
                 </div>
             </div>
-            <form class="form-add-invite">
+            <form class="form-add-invite" action="addInvite" method="POST">
                 <div class="row">
                     <div class="col">
                         <label for="firstName" class="sr-only">Förnamn</label>
@@ -33,10 +36,11 @@
                     </div>
                     <div class="col">
                         <label for="lastName" class="sr-only">Efternamn</label>
-                        <input type="text" id="lastName" name="firstName" class="form-control" placeholder="Efternamn" required>
+                        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Efternamn" required>
                     </div>
                     <div class="col-3 form-check text-center">
-                        <input type="checkbox" id="isAdmin" name="isAdmin" class="form-check-input" data-toggle="tooltip" title="Ge användare admin-rättigheter">
+                        <input type="checkbox" id="isAdmin" name="isAdmin" class="form-check-input" value="true" data-toggle="tooltip" title="Ge användare admin-rättigheter">
+                        <input type="hidden" id="isAdminHidden" name="isAdmin" class="form-check-input" value="false">
                         <label for="isAdmin" class="form-check-label">Admin</label>
                     </div>
                 </div>
@@ -46,6 +50,7 @@
                         <input type="email" id="email" name="email" class="form-control" placeholder="exempel@email.com" required>
                     </div>
                     <div class="col-3 text-center">
+                        <input type="hidden" id="addedByFullName" name="addedByFullName" th:value="${user.fullName}">
                         <button type="submit" class="btn btn-block btn-add-invite">Lägg till</button>
                     </div>
                 </div>
@@ -58,17 +63,19 @@
                     <small class="text-muted">Klicka på 'Bjud in' för skicka inbjudan.</small>
                 </div>
             </div>
-            <table class="table table-sm table-hover table-striped table-invite">
-                <tbody>
-                    <tr>
-                        <td>Anders And</td>
-                        <td>test@gmail.com</td>
-                        <td class="text-right"><button type="submit" class="btn btn-remove-user">X</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <form class="form-send-invite">
-                <button type="submit" class="btn btn-block btn-send-invite">Bjud in</button>
+            <form class="form-send-invite" action="sendInvite" method="POST">
+                <table class="table table-sm table-hover table-striped table-invite">
+                    <tbody>
+                    <form action="deleteInvite" method="POST">
+                        <tr th:each="invite : ${invited}">
+                            <td th:text="${invite.fullName}">Anders And</td>
+                            <td th:text="${invite.email}">test@gmail.com</td>
+                            <td class="text-right"><button type="submit" name="email" th:value="${invite.email}" class="btn btn-remove-user">X</button></td>
+                        </tr>
+                    </form>
+                    </tbody>
+                </table>
+                    <button type="submit" class="btn btn-block btn-send-invite">Bjud in</button>
             </form>
         </div>
     </div>
@@ -79,5 +86,6 @@
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/invite.js}"></script>
 </body>
 </html>
