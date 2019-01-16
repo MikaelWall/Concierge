@@ -33,22 +33,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Lediga tider</th>
-                <th scope="col"></th>
-
-            </tr>
-            </thead>
-            <tbody>
-                <tr th:each="time : ${times}">
-                    <td th:text="${time.getStartClock()}"></td>
-                    <td th:text="${time.getStopClock()}"></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <table class="table">
-            <thead>
-            <tr>
                 <th scope="col">Bokade tider</th>
                 <th scope="col"></th>
 
@@ -58,6 +42,7 @@
             <tr th:each="book : ${bookings}">
                 <td th:text="${book.getStartClock()}"></td>
                 <td th:text="${book.getStopClock()}"></td>
+                <td th:text="${book.isBooked()}"></td>
 
             </tr>
 

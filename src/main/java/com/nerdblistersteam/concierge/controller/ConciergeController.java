@@ -65,6 +65,7 @@ public class ConciergeController {
 
         List<Timespann> booked = new ArrayList<>();
         List<Timespann> free = new ArrayList<>();
+        List<Timespann> freeAndBooked = new ArrayList<>();
         List<Schedule> schedulesFromDB = scheduleService.findAll();
 
 
@@ -80,7 +81,7 @@ public class ConciergeController {
         for (int i = 0; i < booked.size(); i++) {
             if (i == 0) {
                 if(booked.get(i).getStart().isAfter(openBooking)) {
-                    free.add(new Timespann(openBooking, booked.get(i).getStart(), false));
+                    freeAndBooked.add(new Timespann(openBooking, booked.get(i).getStart(), false));
                 }
 
             }
@@ -94,21 +95,29 @@ public class ConciergeController {
 
             if ( i < (booked.size() -1)) {
                 if(booked.get(i).getStop().isBefore(booked.get(i+1).getStart())) {
-                    free.add(new Timespann(booked.get(i).getStop(), booked.get(i+1).getStart(), false));
+                    freeAndBooked.add(new Timespann(booked.get(i).getStop(), booked.get(i+1).getStart(), false));
                 }
 
             }
 
             if (i == (booked.size()-1)) {
                 if(booked.get(i).getStop().isBefore(closeBooking)) {
-                    free.add(new Timespann(booked.get(i).getStop(), closeBooking, false));
+                    freeAndBooked.add(new Timespann(booked.get(i).getStop(), closeBooking, false));
                 }
 
             }
         }
 
+        for (int i = 0; i < booked.size(); i++) {
+            freeAndBooked.add(booked.get(i));
+        }
+
+        freeAndBooked.sort(Comparator.comparing(Timespann::getStart));
+
+
+
         model.addAttribute( "times", free);
-        model.addAttribute("bookings", booked);
+        model.addAttribute("bookings", freeAndBooked);
         return "Rum";
     }
 

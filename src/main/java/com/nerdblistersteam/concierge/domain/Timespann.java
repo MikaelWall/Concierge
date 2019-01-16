@@ -18,6 +18,14 @@ public class Timespann implements Comparator<Timespann>{
         this.isBooked = isBooked;
     }
 
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        isBooked = booked;
+    }
+
     public LocalDateTime getStart() {
         return start;
     }
