@@ -60,7 +60,7 @@ public class ConciergeController {
 
     @GetMapping("/allrooms")
     public String allrooms(Model model) {
-        model.addAttribute("rooms", roomService.findAll());
+        model.addAttribute("rooms", roomService.findAll()); 
         return "feed";
     }
 
