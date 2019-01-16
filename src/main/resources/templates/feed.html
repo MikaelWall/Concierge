@@ -16,20 +16,22 @@
 </head>
 
 <body>
-   <nav th:replace="~{/navbar :: nav}"></nav>
+    <nav th:replace="~{/navbar :: nav}"></nav>
     <nav th:replace="~{/verticalnavbar :: div}"></nav>
     <div class="container text-center">
         <div class="section">
             <div class="container text-center">
                 <table class="table">
                     <thead>
-                        <tr>   
-                            <h1>Alla rum</h1>       
+                        <tr>
+                            <h1>Alla rum</h1>
                         </tr>
                     </thead>
                     <tbody class="text-center">
                         <tr th:each="room : ${rooms}">
-                            <td th:text="${room.name}"></td>
+                            <a class="room-link">
+                                <td th:text="${room.name}"></td>
+                            </a>
                             <td></td>
                         </tr>
                     </tbody>
