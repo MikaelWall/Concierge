@@ -19,13 +19,13 @@
             <h1 class="h3 mb-3 font-weight-normal">Skapa ett konto</h1>
 
             <label for="firstname" class="sr-only">Förnamn</label>
-            <input type="text" id="firstname" name="firstName" class="form-control" placeholder="Förnamn" required autofocus />
+            <input type="text" id="firstname" name="firstName" th:value="${firstName}" class="form-control" placeholder="Förnamn" th:readonly="${readOnly}" required autofocus />
 
             <label for="lastname" class="sr-only">Efternamn</label>
-            <input type="text" id="lastname" name="lastName" class="form-control" placeholder="Efternamn" required autofocus />
+            <input type="text" id="lastname" name="lastName" th:value="${lastName}" class="form-control" placeholder="Efternamn" th:readonly="${readOnly}" required autofocus />
             
             <label for="inputEmail" class="sr-only">Email</label>
-            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required autofocus />
+            <input type="email" id="inputEmail" name="email" th:value="${email}" class="form-control" placeholder="Email" th:readonly="${readOnly}" required autofocus />
             
             <label for="inputPassword" class="sr-only">Lösenord</label>
             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Lösenord" required />

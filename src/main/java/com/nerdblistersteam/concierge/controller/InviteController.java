@@ -52,7 +52,7 @@ public class InviteController {
             invitedService.delete(invitedDelete);
             redirectAttributes.addFlashAttribute("deleted", true);
         } else {
-            redirectAttributes.addFlashAttribute("deleted", false);
+            redirectAttributes.addFlashAttribute("error", true);
         }
         return "redirect:/invite";
     }
@@ -60,10 +60,14 @@ public class InviteController {
     @PostMapping("/sendInvite")
     public String sendInvite(RedirectAttributes redirectAttributes, Model model) {
         List<Invited> invitedList = invitedService.findAll();
-        for (Invited invited : invitedList) {
-            invitedService.sendInvitationEmail(invited);
+        if (!invitedList.isEmpty()) {
+            for (Invited invited : invitedList) {
+                invitedService.sendInvitationEmail(invited);
+            }
+            redirectAttributes.addFlashAttribute("success", true);
+        } else {
+            redirectAttributes.addFlashAttribute("empty", true);
         }
-        redirectAttributes.addFlashAttribute("success", true);
         return "redirect:/invite";
     }
 }

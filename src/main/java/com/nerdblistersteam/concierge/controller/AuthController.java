@@ -1,7 +1,9 @@
 package com.nerdblistersteam.concierge.controller;
 
+import com.nerdblistersteam.concierge.domain.Invited;
 import com.nerdblistersteam.concierge.domain.Role;
 import com.nerdblistersteam.concierge.domain.User;
+import com.nerdblistersteam.concierge.service.InvitedService;
 import com.nerdblistersteam.concierge.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -21,9 +22,11 @@ import java.util.Optional;
 public class AuthController {
 
     private final Logger logger = LoggerFactory.getLogger(AuthController.class);
+    private InvitedService invitedService;
     private UserService userService;
 
-    public AuthController(UserService userService) {
+    public AuthController(InvitedService invitedService, UserService userService) {
+        this.invitedService = invitedService;
         this.userService = userService;
     }
 
@@ -69,29 +72,6 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/login")
-    public String postLogin(@RequestParam String username,
-                            @RequestParam String password) throws  Exception {
-
-//        //Nedan är endast test för att kunna se att koppling finns till databasen
-//        Connection conn = DriverManager.getConnection("jdbc:h2:mem:concierge", "sa", "");
-//        System.out.println("Connected to test db");
-//        Statement statement = conn.createStatement();
-//        statement.executeUpdate("INSERT INTO user VALUES (2, null, 'woop@woop.se', TRUE, '" + username +"', 'woop', '" + password + "')");
-//        ResultSet resultSet = statement.executeQuery("SELECT * FROM USER");
-//
-//        while(resultSet.next()) {
-//            System.out.println(resultSet.getInt("id"));
-//            System.out.println(resultSet.getString("email"));
-//            System.out.println(resultSet.getString("password"));
-//
-//        }
-//        conn.close();
-
-        System.out.println("Du har loggat in med: " + username + password);
-        return "/auth/login";
-    }
-
     @GetMapping("/activate/{email}/{activationCode}")
     public String activateAdmin(@PathVariable String email, @PathVariable String activationCode) {
         Optional<User> user = userService.findByEmailAndActivationCode(email, activationCode);
@@ -105,25 +85,22 @@ public class AuthController {
         return "redirect:/";
     }
 
-    @GetMapping("/register/{addedBy}/{email}/{activationCode}")
-    public String activateUserLink(Model model, @PathVariable String email, @PathVariable String addedBy, @PathVariable String activationCode) {
-        Optional<User> user = userService.findByEmailAndActivationCode(email, activationCode);
-        if (user.isPresent()) {
-            User newUser = user.get();
-            newUser.setAddedByFullName(addedBy);
-            userService.save(newUser);
+    @GetMapping("/register/{email}/{activationCode}")
+    public String activateUserLink(Model model, @PathVariable String email, @PathVariable String activationCode) {
+        Optional<Invited> invited = invitedService.findByEmailAndActivationCode(email, activationCode);
+        if (invited.isPresent()) {
+            Invited newInvited = invited.get();
             model
                     .addAttribute("email", email)
-                    .addAttribute("firstName", newUser.getFirstName())
-                    .addAttribute("lastName", newUser.getLastName())
-                    .addAttribute("activationCode", activationCode)
-                    .addAttribute("disabled", "disabled");
-            return "/auth/registrering";
+                    .addAttribute("firstName", newInvited.getFirstName())
+                    .addAttribute("lastName", newInvited.getLastName())
+                    .addAttribute("readOnly", true);
+            return "/auth/Registrera";
         }
         return "redirect:/";
     }
 
-    @PostMapping("/register/{addedBy}/{email}/{activationCode}")
+    @PostMapping("/register/{email}/{activationCode}")
     public String activateUser(@Valid User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             // show validation errors

@@ -38,8 +38,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean enabled;
 
-    private String addedByFullName;
-
     @OneToOne
     @PrimaryKeyJoinColumn
     private Schedule schedule;

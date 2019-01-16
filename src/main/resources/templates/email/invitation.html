@@ -10,7 +10,7 @@
 
 <p th:text="|Hej ${invited.firstName}!|">Hej Username!</p>
 <p><span th:text="${invited.addedByFullName}">Admin</span> har bjudit in dig till Concierge. Klicka på länken nedan för att aktivera ditt konto.</p>
-<a th:href="${baseURL} + '/activate/' + ${invited.email} + '/' + ${invited.activationCode}">Aktivera konto</a>
+<a th:href="${baseURL} + '/register/' + ${invited.email} + '/' + ${invited.activationCode}">Aktivera konto</a>
 
 <br>
 <p>Varmt välkommen!</p>
