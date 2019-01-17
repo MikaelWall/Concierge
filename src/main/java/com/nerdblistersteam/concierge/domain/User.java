@@ -42,8 +42,6 @@ public class User implements UserDetails {
     @JsonIgnore
     private boolean enabled;
 
-    private String addedByFullName;
-
     @OneToOne
     @PrimaryKeyJoinColumn
     @JsonIgnore
@@ -86,9 +84,9 @@ public class User implements UserDetails {
         roles.add(role);
     }
 
-    public void addRoles(Set<Role> roles) {
-        roles.forEach(this::addRole);
-    }
+//    public void addRoles(Set<Role> roles) {
+//        roles.forEach(this::addRole);
+//    }
 
     @Override
     @JsonIgnore
