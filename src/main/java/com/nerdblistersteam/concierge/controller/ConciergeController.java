@@ -9,6 +9,8 @@ import com.nerdblistersteam.concierge.service.ScheduleService;
 import com.nerdblistersteam.concierge.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -142,7 +144,7 @@ public class ConciergeController {
         freeAndBooked.sort(Comparator.comparing(Timespann::getStart));
 
 
-
+        model.addAttribute("roomName", name);
         model.addAttribute( "times", free);
         model.addAttribute("bookings", freeAndBooked);
         return "Rum";
@@ -151,13 +153,13 @@ public class ConciergeController {
     //Skapar bokning för ett specifikt rum och visar bokade och lediga tider. Just nu kan man bara boka den dag som dagens datum.
     //Här ska koppling göras till användare och rum, då det nu är hårdkodat.
     @PostMapping("/room/createbooking")
-    public String createNewBooking(@RequestParam LocalTime start, @RequestParam LocalTime stop, RedirectAttributes redirectAttributes) {
+    public String createNewBooking(@RequestParam String roomName, @RequestParam LocalTime start, @RequestParam LocalTime stop, RedirectAttributes redirectAttributes) {
 
-        Optional<User> findUser = userService.findById(3L);
-        Optional<Room> findRoom = roomService.findByName("Larsson");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+        Optional<Room> findRoom = roomService.findByName(roomName);
         Timespann createdBooking = new Timespann(LocalDate.now().atTime(start), LocalDate.now().atTime(stop), true);
-        if (findUser.isPresent() & findRoom.isPresent()) {
-            User user1 = findUser.get();
+        if (findRoom.isPresent()) {
             Room room1 = findRoom.get();
             String name = room1.getName();
             System.out.println(createdBooking.getStart());
@@ -165,7 +167,7 @@ public class ConciergeController {
             Schedule add = new Schedule(createdBooking.getStart(), createdBooking.getStop());
             System.out.println(add.getStart());
             System.out.println(add.getStop());
-            add.addUser(user1);
+            add.addUser(currentUser);
             add.addRoom(room1);
 
             scheduleService.save(add);
