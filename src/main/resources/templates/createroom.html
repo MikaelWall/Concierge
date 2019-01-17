@@ -110,7 +110,9 @@
                 <tbody>
                 <form class="form-deleteroom" action="deleteroom" method="post">
                     <tr th:each="room : ${rooms}">
-                        <td th:text="${room.name}"></td>
+                        <td>
+                            <a th:href="@{|/room/${room.name}|}" th:text="${room.name}"></a>
+                        </td>
                         <td class="text-right">
                             <button th:value="${room.name}" name="deleteName" class="btn btn-delete-room"
                                     type="submit">X

@@ -204,10 +204,8 @@ public class ConciergeController {
             Optional<Description> projectorDescription = descriptionService.findByTag("Projektor");
             projectorDescription.ifPresent(newRoom::addDescription);
         }
-        //Description newDescription = new Description(seats);
         roomService.save(newRoom);
-        // descriptionRepository.save(newDescription);
-        System.out.println("Skapat rum " + name);
+        System.out.println("Skapat rum: " + name);
         return "redirect:/createroom";
     }
 

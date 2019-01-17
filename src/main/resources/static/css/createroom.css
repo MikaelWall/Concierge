@@ -56,3 +56,11 @@
  .btn-delete-room:hover {
    background: #666;
  }
+
+a{
+  color: #690000;
+}
+
+a:hover{
+  color: rgba(179, 179, 179, 0.733);
+}
