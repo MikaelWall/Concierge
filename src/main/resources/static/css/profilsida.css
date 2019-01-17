@@ -1,62 +1,135 @@
-.navbar{ background:#690000;}
-
-.nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
-
-.nav-link{ margin-right: 1em !important;}
-
-.navbar-collapse{ justify-content: flex-end;}
-
-.navbar-toggler{  background:#fff !important;}
-
-.main-name,.email-info{
-  text-align:center;
-  margin:0;
+.profile-layout .profile-section .main-name,
+.profile-layout .profile-section .email-info {
+    text-align: center;
+    margin: 0;
 }
 
-.main-name{
-  margin-top:10px;
-  margin-bottom:10px;
-  font-family: 'Cinzel', serif;
+.profile-layout {
+    min-height: 200px;
+    border: 1px solid #dadada;
 }
 
-.profile-img-section .profile-img{
- position:absolute;
- left:50%;
- top:50%;
- transform:translate(-50%,-50%);
- width:200px;
- height:200px;
-}
-.profile-img{
-  top:0;
-  border-radius:50%;
-  overflow:hidden;
-  margin:0 auto;
+.profile-layout .profile-section .main-name {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Cinzel', serif;
 }
 
- .text-information .email-info{
-  color:#909090;
-  margin-bottom:15px;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size:16px;
-}
- 
-.tab-section .tab-content,.profile-img-section,.text-information {
-  padding:20px 10px;
+.profile-layout .profile-img-section {
+    height: 300px;
+    position: relative;
+    padding: 20px 10px 20px 10px !important;
+    background-image: url(../img/bild6.jpeg);
+
 }
 
- span.input-group-addon{
-  min-width:50px;
-}
- span.input-group-addon .fa-lg{
-  font-size:20px;
-}
-.no-edit-forms input.form-control{
-  background:#eee;
-  box-shadow:none;
-  pointer-events:none;
+.profile-layout .profile-img-section .profile-img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
 }
 
-.profile-img-section{
-  background-image: url("/static/img/bild6.jpeg");
+.profile-layout .profile-img {
+    top: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+
+
+.profile-layout .profile-section .text-information .email-info{
+    color: #666;
+    margin-bottom: 15px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+}
+.admin{
+    font-family: 'Nunito Sans', sans-serif;
+    margin-left: 300px;
+    color: #666;
+    font-size: 16px;
+    
+}
+.profile-section .tab-section .nav-tabs {
+    border-radius: 6px;
+
+}
+
+.profile-section .tab-section .tab-content,
+.profile-layout .profile-img-section,
+.profile-layout .profile-section .text-information {
+    padding: 20px 10px;
+}
+
+.profile-section .tab-section .nav-tabs>li {
+    margin-bottom: 0px;
+}
+
+.profile-section .tab-section .nav-tabs>li>a {
+    padding: 13px 15px;
+}
+
+.profile-section .tab-section .nav-tabs>li.active>a {
+    border: 1px solid #cccccc;
+    background: #eeeeee;
+    color: #555555;
+    border-radius: 4px;
+}
+
+.profile-section .tab-section .tab-pane .form-control {
+    height: 45px;
+
+}
+
+.profile-section .tab-pane>.form-group:last-of-types {
+    margin-bottom: 0px;
+}
+
+.profile-section .btn-submit {
+    height: 40px;
+    line-height: 28px;
+    border-radius: 4px;
+
+}
+
+.profile-section span.input-group-addon {
+    min-width: 50px;
+}
+
+.profile-section span.input-group-addon .fa-lg {
+    font-size: 20px;
+}
+
+.no-edit-forms input.form-control {
+    background: #eee;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+.profile-section .friend-list .media>a,
+.profile-section .friend-list .media>a:hover {
+    text-decoration: none;
+}
+
+.profile-section .friend-list .media-left .media-object {
+    height: auto;
+}
+
+.nav-tabs {
+    margin: 1rem;
+    border: 2rem;
+}
+
+.sparabutton {
+    border: 1px solid #690000;
+    background: #690000;
+    color: #fff;
+    margin-top: 1rem;
+}
+.star{
+    color: #690000;
 }
