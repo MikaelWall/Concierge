@@ -53,10 +53,10 @@ public class ConciergeController {
         model.addAttribute("bookings", scheduleService.findAll());
         return "calendar";
     }
-    @GetMapping("/api/schedule")
-    public @ResponseBody
-    List<Schedule> getSchedule() {
-
+//    @GetMapping("/api/schedule")
+//    public @ResponseBody
+//   List<Schedule> getSchedule() {
+//
 //        System.out.println("Inuti getSchedule:");
 //        List<Schedule> result = scheduleService.findAll();
 //
@@ -73,10 +73,10 @@ public class ConciergeController {
 //        System.out.println("Hela listan: ");
 //        System.out.println(result);
 //        System.out.println();
-
-        return scheduleService.findAll();
-
-    }
+//
+//        return scheduleService.findAll();
+//
+//    }
     @GetMapping("/about")
     public String about() {
         return "Omoss";

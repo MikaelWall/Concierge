@@ -43,7 +43,6 @@
                     <tr th:each="book : ${bookings}" class="" th:classappend="${book.isBooked()} ? table-danger : table-success">
                         <td th:text="${book.getStartClock()}"></td>
                         <td th:text="${book.getStopClock()}"></td>
-
                     </tr>
 
                 </tbody>

@@ -3,16 +3,49 @@
     width: 65%;
     margin: 0px auto !important;
     float: none;
+    border: 4px #690000 solid;
 }
 
-table th{
-    text-align: center; 
+table th {
+    text-align: center;
+    border: 4px #690000 solid;
 }
 
-span{
+span {
     font-size: 3rem
 }
 
+a {
+    display: block;
+    height: 100%;
+}
+
+.content {
+    vertical-align: middle;
+
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+}
+
+td {
+    font-family: 'Montserrat', sans-serif;
+    color: #690000;
+}
+
 a{
-    display: block; height: 100%;
+    color: #690000; 
+}
+
+.table td,
+.table th {
+    border: solid #690000 4px;
+    border-top: none;
+}
+
+a:hover{
+    color: rgba(179, 179, 179, 0.733);
 }
