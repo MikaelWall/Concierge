@@ -38,9 +38,10 @@
       defaultDate: new Date(),
       editable: false,
       selectable: true,
+       height: 900,
       eventLimit: true, // allow "more" link when too many events
 
-/////////////////////////// onclick
+/////////////////////////// onclick start
       eventClick: function(calEvent, jsEvent, view) {
 
         if (calEvent.url) {
@@ -58,7 +59,7 @@
 
       /////////////////////////////////////////// onclick end
 
-      ///////////////////////////////////////////hover
+      ///////////////////////////////////////////hover start
 
 
 
@@ -112,19 +113,51 @@ eventMouseout: function(calEvent, jsEvent) {
       allDaySlot: false,
 
 
-      resources: [
-        { id: 'a', title: 'Room A' },
-        { id: 'b', title: 'Room B', eventColor: 'green' },
-        { id: 'c', title: 'Room C', eventColor: 'orange' },
-        { id: 'd', title: 'Room D', eventColor: 'red' }
+      <!--resources: [-->
+        <!--{ id: 'a', title: 'Room A' },-->
+        <!--{ id: 'b', title: 'Room B', eventColor: 'green' },-->
+        <!--{ id: 'c', title: 'Room C', eventColor: 'orange' },-->
+        <!--{ id: 'd', title: 'Room D', eventColor: 'red' }-->
 
-      ],
-       <!--events: { // you can also specify a plain string like 'json/events.json'-->
-        <!--url: 'http://localhost:8080/api/schedule',-->
-        <!--error: function() {-->
-          <!--$('#script-warning').show();-->
-        <!--}-->
-      <!--}-->
+      <!--]-->
+      <!---->
+
+      resources: function (callback, start, end, timezone) {
+            $.ajax({
+                type: "GET",    //WebMethods will not allow GET
+                url: "http://localhost:8080/api/room",
+                //completely take out 'data:' line if you don't want to pass to webmethod - Important to also change webmethod to not accept any parameters
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (doc) {
+                    var ourCalenderSource = [];   //javascript event object created here
+
+                    let obj = doc;
+                    $(obj).each(function () {
+
+                            <!--let tagText =$(this).attr('room');-->
+                            <!--let room = tagText["name"]-->
+
+
+                            ourCalenderSource.push({
+                            title: $(this).attr('name'),
+                            id: $(this).attr('id')
+
+                        });
+
+                    });
+                    if (callback) {
+                        console.log("Här ÄR MINA EVENT:");
+                        console.log(ourCalenderSource);
+                        console.log();
+                        callback(ourCalenderSource);
+                    }
+                }
+            });
+        }
+
+      ,
+
             events: function (start, end, timezone, callback) {
             $.ajax({
                 type: "GET",    //WebMethods will not allow GET
@@ -136,9 +169,6 @@ eventMouseout: function(calEvent, jsEvent) {
                     var ourCalenderEvents = [];   //javascript event object created here
 
                     let obj = doc;
-                    console.log("Här ÄR obj:");
-                    console.log(obj);
-                    console.log();
                     $(obj).each(function () {
                             let titleTextObj = $(this).attr('user');
 
@@ -147,6 +177,7 @@ eventMouseout: function(calEvent, jsEvent) {
                             let taggar = '';
                             let titleText = tagText["name"] + " bokad för: " + titleTextObj["fullName"] ;
                             let room = tagText["name"]
+                            let roomId= tagText["id"]
                             for (let i=0; i<tagObj.length; i++){
 
                             taggar += tagObj[i].tag+'\n';
@@ -159,15 +190,13 @@ eventMouseout: function(calEvent, jsEvent) {
                             roomName: room,
                             start: $(this).attr('start'), // will be parsed into DateTime object
                             end: $(this).attr('stop'),
-                            id: $(this).attr('id')
+                            id: $(this).attr('id'),
+                            resourceId:roomId
 
                         });
 
                     });
                     if (callback) {
-                        console.log("Här ÄR MINA EVENT:");
-                        console.log(ourCalenderEvents);
-                        console.log();
                         callback(ourCalenderEvents);
                     }
                 }
@@ -178,7 +207,7 @@ eventMouseout: function(calEvent, jsEvent) {
       timeFormat: 'H(:mm)',
       slotLabelFormat:'H:mm',
       minTime:"06:00:00",
-      slotLabelInterval:"00:30",
+      slotLabelInterval:"01:00",
 
       select: function(start, end, jsEvent, view, resource) {
         console.log(

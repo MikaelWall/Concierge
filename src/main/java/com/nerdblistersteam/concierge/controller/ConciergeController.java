@@ -54,30 +54,7 @@ public class ConciergeController {
         model.addAttribute("bookings", scheduleService.findAll());
         return "calendar";
     }
-//    @GetMapping("/api/schedule")
-//    public @ResponseBody
-//   List<Schedule> getSchedule() {
-//
-//        System.out.println("Inuti getSchedule:");
-//        List<Schedule> result = scheduleService.findAll();
-//
-//        System.out.println();
-//        System.out.println("TEST UTSKRIFT AV getSchedule:");
-//        System.out.println("Antal element i listan:" + result.size());
-//        System.out.println();
-//        System.out.println("Element 1: ");
-//        System.out.println(result.get(0));
-//        System.out.println();
-//        System.out.println("Element 1 användaren:");
-//        System.out.println(result.get(0).getUser());
-//        System.out.println();
-//        System.out.println("Hela listan: ");
-//        System.out.println(result);
-//        System.out.println();
-//
-//        return scheduleService.findAll();
-//
-//    }
+
     @GetMapping("/about")
     public String about() {
         return "Omoss";
@@ -95,6 +72,13 @@ public class ConciergeController {
     List<Schedule> getSchedule() {
         return scheduleService.findAll();
     }
+
+    @GetMapping("/api/room")
+    public @ResponseBody
+    List<Room> getRoom() {
+        return roomService.findAll();
+    }
+
 
     //Denna funktion tar ett värde från allrooms och visar sedan lediga och bokade tider för rummet.
     //Koden bör inte ligga här, kanske bättre placering i RoomService.
