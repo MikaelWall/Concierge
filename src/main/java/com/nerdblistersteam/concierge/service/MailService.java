@@ -1,5 +1,6 @@
 package com.nerdblistersteam.concierge.service;
 
+import com.nerdblistersteam.concierge.domain.Invited;
 import com.nerdblistersteam.concierge.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ public class MailService {
     private Logger logger = LoggerFactory.getLogger(MailService.class);
     private final SpringTemplateEngine templateEngine;
     private final JavaMailSender javaMailSender;
-    private final String BASE_URL = "https://localhost:8080";
+    private final String BASE_URL = "http://localhost:8080";
 
     public MailService(SpringTemplateEngine templateEngine, JavaMailSender javaMailSender) {
         this.templateEngine = templateEngine;
@@ -44,7 +45,7 @@ public class MailService {
     }
 
     @Async
-    public void sendEmailFromTemplate(User user, String templateName, String subject) {
+    public void sendEmailFromUserTemplate(User user, String templateName, String subject) {
         Locale locale = new  Locale("sv", "SE");
         Context context = new Context(locale);
         context.setVariable("user", user);
@@ -54,14 +55,25 @@ public class MailService {
     }
 
     @Async
+    public void sendEmailFromInvitedTemplate(Invited invited, String templateName, String subject) {
+        Locale locale = new  Locale("sv", "SE");
+        Context context = new Context(locale);
+        context.setVariable("invited", invited);
+        context.setVariable("baseURL", BASE_URL);
+        String content = templateEngine.process(templateName, context);
+        sendEmail(invited.getEmail(), subject, content, false, true);
+    }
+
+
+    @Async
     public void sendActivationEmail(User user) {
         logger.debug("Skickar aktiveringsmejl till '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "email/activation", "Concierge aktiveringsmejl");
+        sendEmailFromUserTemplate(user, "email/activation", "Concierge aktiveringsmejl");
     }
 
     @Async
-    public void sendInvitationEmail(User user) {
-        logger.debug("Skickar inbjudningsmejl till '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "email/invitation", "Inbjudan till Concierge");
+    public void sendInvitationEmail(Invited invited) {
+        logger.debug("Skickar inbjudningsmejl till '{}'", invited.getEmail());
+        sendEmailFromInvitedTemplate(invited, "email/invitation", "Inbjudan till Concierge");
     }
 }

@@ -8,34 +8,61 @@
     <title>Registrera</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'>
     <link rel="stylesheet" type="text/css" th:href='@{/css/registrera.css}'>
 
 </head>
-                
+
 <body>
+
+    <nav th:replace="~{/navbar :: nav}"></nav>
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <div class="alert alert-success" role="alert" th:if="${success}">
+                Du är nu registrerad. Ett aktiveringsmail har skickats till din epost-adress.
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
     <div class="container text-center">
         <form class="form-signin" action="register" method="post">
             <!-- <i class="fas fa-gamepad fa-5x"></i> -->
             <h1 class="h3 mb-3 font-weight-normal">Skapa ett konto</h1>
 
             <label for="firstname" class="sr-only">Förnamn</label>
-            <input type="text" id="firstname" name="firstName" class="form-control" placeholder="Förnamn" required autofocus />
+            <input type="text" id="firstname" name="firstName" th:value="${firstName}" class="form-control" placeholder="Förnamn"
+                th:readonly="${readOnly}" required autofocus />
 
             <label for="lastname" class="sr-only">Efternamn</label>
-            <input type="text" id="lastname" name="lastName" class="form-control" placeholder="Efternamn" required autofocus />
-            
+            <input type="text" id="lastname" name="lastName" th:value="${lastName}" class="form-control" placeholder="Efternamn"
+                th:readonly="${readOnly}" required autofocus />
+
             <label for="inputEmail" class="sr-only">Email</label>
-            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required autofocus />
-            
+            <input type="email" id="inputEmail" name="email" th:value="${email}" class="form-control" placeholder="Email"
+                th:readonly="${readOnly}" required autofocus />
+
             <label for="inputPassword" class="sr-only">Lösenord</label>
-            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Lösenord" required />
-            
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Lösenord"
+                required />
+
             <label for="inputPasswordConfirm" class="sr-only">Bekräfta lösenord</label>
-            <input type="password" id="inputPasswordConfirm" name="confirmPassword" class="form-control" placeholder="Bekräfta lösenord"required />
-            
+            <input type="password" id="inputPasswordConfirm" name="confirmPassword" class="form-control" placeholder="Bekräfta lösenord"
+                required />
+
+            <label for="isAdmin" class="sr-only">Admin-rättigheter</label>
+            <input type="hidden" id="isAdmin" name="isAdmin" class="form-control" th:value="${isAdmin}">
+
             <p>Har du redan ett konto? <a th:href="@{/login}">Logga in</a></p>
             <button class="btn btn-lg button btn-block" type="submit">Skapa ett konto</button>
+
+            <p class="mt-5 mb-3 text-muted">Nerd Blister Team Ltd. &copy; 2019</p>
         </form>
+
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>

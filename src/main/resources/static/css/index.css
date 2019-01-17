@@ -1,14 +1,3 @@
-html,
-h1
-h2,
-h3,
-h4,
-h5,
-h6,
-a {
- font-family: "Raleway";
-}
-
 .nav-link,.navbar-brand {
    color: #690000;
    cursor: pointer;
@@ -100,4 +89,8 @@ a {
 .greatv-big{
    font-family: 'Great Vibes'; 
    font-size: 6rem;
+}
+
+.btn-register {
+  margin-bottom: 10rem;
 }

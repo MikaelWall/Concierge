@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'>
+    <link rel="stylesheet" type="text/css" th:href='@{/css/verticalnavbar.css}'>
+    <link rel="stylesheet" type="text/css" th:href='@{/css/invite.css}'>
+
+    <title>Bjud in användare</title>
+</head>
+<body>
+    <nav th:replace="~{/navbar :: nav}"></nav>
+    <nav th:replace="~{/verticalnavbar :: div}"></nav>
+
+    <div class="container">
+        <div class="alert alert-success" role="alert" th:if="${success}">
+            Inbjudan har skickats!
+        </div>
+        <div class="alert alert-danger" role="alert" th:if="${empty}">
+            Du måste lägga till en eller flera personer i listan innan du kan skicka en inbjudan.
+        </div>
+        <div class="alert alert-success" role="alert" th:if="${deleted}">
+            Inbjudan har tagits bort från listan.
+        </div>
+        <div class="alert alert-danger" role="alert" th:if="${error}">
+            Något gick fel, försök igen.
+        </div>
+        <div class="invite-box">
+            <div class="row">
+                <div class="col">
+                    <h2>Bjud in användare</h2>
+                    <small class="text-muted">Använd formuläret nedan för att lägga till användare i inbjudningslistan.</small>
+                </div>
+            </div>
+            <form class="form-add-invite" action="addInvite" method="POST">
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="firstName" class="sr-only">Förnamn</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Förnamn" required>
+                    </div>
+                    <div class="col-sm">
+                        <label for="lastName" class="sr-only">Efternamn</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Efternamn" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="email" class="sr-only">email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="exempel@email.com" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 form-check text-center">
+                        <input type="checkbox" id="isAdmin" name="isAdmin" class="form-check-input" value="true" data-toggle="tooltip" title="Ge användare admin-rättigheter">
+                        <input type="hidden" id="isAdminHidden" name="isAdmin" class="form-check-input" value="false">
+                        <label for="isAdmin" class="form-check-label">Admin</label>
+                    </div>
+                    <div class="col-sm-3 text-center">
+                        <input type="hidden" id="addedByFullName" name="addedByFullName" th:value="${user.fullName}">
+                        <button type="submit" class="btn btn-block btn-add-invite">Lägg till</button>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </form>
+        </div>
+        <div class="invite-list">
+            <div class="row">
+                <div class="col">
+                    <h2>Inbjudningslista</h2>
+                    <small class="text-muted">Klicka på 'Bjud in' för skicka inbjudan.</small>
+                </div>
+            </div>
+                <table class="table table-sm table-hover table-striped table-invite">
+                    <tbody>
+                    <form action="deleteInvite" method="POST">
+                        <tr th:each="invite : ${invited}">
+                            <td th:text="${invite.fullName}">Anders And</td>
+                            <td th:text="${invite.email}">test@gmail.com</td>
+                            <td class="text-right"><button type="submit" name="email" th:value="${invite.email}" class="btn btn-remove-user">X</button></td>
+                        </tr>
+                    </form>
+                    </tbody>
+                </table>
+            <form class="form-send-invite" action="sendInvite" method="POST">
+                    <button type="submit" class="btn btn-block btn-send-invite">Bjud in</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/invite.js}"></script>
+</body>
+</html>
