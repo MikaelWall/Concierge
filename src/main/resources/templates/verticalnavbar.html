@@ -14,8 +14,8 @@
 <body>
     <div class="vertical-menu vertical-center shadow" th:fragment="verticalnavigation">
         <a href="#" class="active">Profil</a>
-        <a href="#rumlista">Alla rum</a>
-        <a href="#kalender">Kalender</a>
+        <a th:href="@{/allrooms}">Alla rum</a>
+        <a th:href="@{/calendar}">Kalender</a>
         <a th:href="@{/invite}">Bjud in</a>
         <a href="#bokningar">Skapa/ta bort</a>
     </div>
