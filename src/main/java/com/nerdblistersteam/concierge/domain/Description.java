@@ -1,5 +1,6 @@
 package com.nerdblistersteam.concierge.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -24,5 +25,6 @@ public class Description {
     private String tag;
 
     @ManyToMany(mappedBy = "descriptions")
+    @JsonIgnore
     private Collection<Room> rooms;
 }
