@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
@@ -149,12 +150,13 @@ public class ConciergeController {
 
     //Skapar bokning för ett specifikt rum och visar bokade och lediga tider. Just nu kan man bara boka den dag som dagens datum.
     //Här ska koppling göras till användare och rum, då det nu är hårdkodat.
-    @PostMapping("/createbooking")
-    public String createNewBooking(HttpServletRequest request, @RequestParam LocalTime start, @RequestParam LocalTime stop) {
+    @PostMapping("/room/createbooking")
+    public String createNewBooking(@RequestParam LocalTime start, @RequestParam LocalTime stop, RedirectAttributes redirectAttributes) {
 
         Timespann createdBooking = new Timespann(LocalDate.now().atTime(start), LocalDate.now().atTime(stop), true);
         User user1 = userService.findById(3L).get();
         Room room1 = roomService.findByName("Larsson").get();
+        String name = room1.getName();
         System.out.println(createdBooking.getStart());
         System.out.println(createdBooking.getStop());
         Schedule add = new Schedule(createdBooking.getStart(), createdBooking.getStop());
@@ -165,8 +167,9 @@ public class ConciergeController {
 
         scheduleService.save(add);
 
-        String referer = request.getHeader("Referer");
-        return "redirect:" + referer;
+        redirectAttributes.addAttribute("name", room1.getName());
+
+        return "redirect:/room/{name}";
     }
 
     @PostMapping("/createroom")
@@ -176,7 +179,7 @@ public class ConciergeController {
         roomService.save(newRoom);
        // descriptionRepository.save(newDescription);
         System.out.println("Skapat rum " + name);
-        return "index";
+        return "redirect:/createroom";
     }
 
     @PostMapping("/deleteroom")
