@@ -26,7 +26,7 @@
                     <tbody class="text-center">
                         <tr th:each="room : ${rooms}">
                             <td>
-                                <a th:href="${room.name}" th:text="${room.name}"></a>
+                                <a th:href="@{|/room/${room.name}|}" th:text="${room.name}"></a>
                             </td>
                         </tr>
                     </tbody>

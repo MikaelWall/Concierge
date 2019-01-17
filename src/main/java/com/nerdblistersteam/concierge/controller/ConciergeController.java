@@ -98,7 +98,7 @@ public class ConciergeController {
 
     //Denna funktion tar ett värde från allrooms och visar sedan lediga och bokade tider för rummet.
     //Koden bör inte ligga här, kanske bättre placering i RoomService.
-    @GetMapping("/{name}")
+    @GetMapping("/room/{name}")
     public String room(@PathVariable String name,Model model) {
 
         //Bokningsfönstret per dag

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -16,8 +16,8 @@
         <a th:href="@{/profile}" class="active">Profil</a>
         <a th:href="@{/allrooms}">Alla rum</a>
         <a th:href="@{/calendar}">Kalender</a>
-        <a th:href="@{/invite}">Bjud in</a>
-        <a th:href="@{/createroom}">Redigera rum</a>
+        <a th:href="@{/invite}" sec:authorize="hasAuthority('ROLE_ADMIN')">Bjud in</a>
+        <a th:href="@{/createroom}" sec:authorize="hasAuthority('ROLE_ADMIN')">Redigera rum</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
