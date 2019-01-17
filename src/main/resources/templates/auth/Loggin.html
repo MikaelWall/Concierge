@@ -17,6 +17,10 @@
 
     <nav th:replace="~{/navbar :: nav}"></nav>
 
+    <div class="alert alert-danger" th:if="${param.error != null}">
+        Ogiltig mailadress eller lösenord.
+    </div>
+
     <div class="container text-center">
             <form class="form-signin" th:action="@{/login}" method="post">
             <h1 class="h3 mb-3 font-weight-normal">Logga in</h1>
