@@ -9,6 +9,7 @@
     <link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
+        
     <link rel="stylesheet" type="text/css" th:href='@{/css/feed.css}'>
     <link rel="stylesheet" type="text/css" th:href='@{/css/verticalnavbar.css}'>
     <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'>
@@ -20,19 +21,13 @@
     <nav th:replace="~{/verticalnavbar :: div}"></nav>
     <div class="container text-center">
         <div class="section">
-            <div class="container text-center">
+            <div class="container text-center content">
                 <table class="table">
-                    <thead>
-                        <tr>
-                            <h1>Alla rum</h1>
-                        </tr>
-                    </thead>
                     <tbody class="text-center">
                         <tr th:each="room : ${rooms}">
-                            <a class="room-link">
-                                <td th:text="${room.name}"></td>
-                            </a>
-                            <td></td>
+                            <td>
+                                <a th:href="${room.name}" th:text="${room.name}"></a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
