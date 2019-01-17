@@ -14,6 +14,10 @@ body {
   margin-bottom: 1rem;
 }
 
+.col-seats {
+  padding-top: 1rem;
+}
+
 .form-add-booking,
 .table-bookings {
   width: 100%;

@@ -88,6 +88,15 @@ public class ConciergeController {
     @GetMapping("/room/{name}")
     public String room(@PathVariable String name,Model model) {
 
+        Optional<Room> currentRoomFind = roomService.findByName(name);
+
+        if (currentRoomFind.isPresent()) {
+            Room currentRoom = currentRoomFind.get();
+
+            model.addAttribute("room", currentRoom);
+            model.addAttribute("descriptions", currentRoom.getDescriptions());
+        }
+
         //Bokningsfönstret per dag
         LocalDateTime openBooking = LocalDateTime.of(LocalDate.now(), LocalTime.of(6, 0));
         LocalDateTime closeBooking = LocalDateTime.of(LocalDate.now(), LocalTime.of(17, 0));

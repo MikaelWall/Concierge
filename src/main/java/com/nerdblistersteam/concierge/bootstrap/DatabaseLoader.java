@@ -85,7 +85,7 @@ public class DatabaseLoader implements CommandLineRunner {
         Description whiteboard = new Description("Whiteboard");
         descriptionRepository.save(whiteboard);
         descriptions.add(whiteboard);
-        Description projector = new Description("Projector");
+        Description projector = new Description("Projektor");
         descriptionRepository.save(projector);
         descriptions.add(projector);
 

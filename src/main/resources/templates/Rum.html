@@ -33,6 +33,17 @@
                 <div class="col">
                     <h1 th:text="${name}"></h1>
                 </div>
+                <div class="col"></div>
+                <div class="col col-seats">
+                    <p><span>Antal platser: </span><span th:text="${room.seatNum}"></span></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" >
+                    <ul>
+                        <li th:each="description : ${descriptions}" th:text="${description.tag}"></li>
+                    </ul>
+                </div>
             </div>
             <form class="form-add-booking" action="createbooking" method="POST">
                 <div class="row">
