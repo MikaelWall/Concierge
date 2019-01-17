@@ -20,7 +20,7 @@
     <nav th:replace="~{/verticalnavbar :: div}"></nav>
     <div class="container text-center">
         <div class="section">
-            <div class="container text-center">
+            <div class="container text-center content">
                 <table class="table">
                     <thead>
                         <tr>
@@ -29,8 +29,8 @@
                     </thead>
                     <tbody class="text-center">
                         <tr th:each="room : ${rooms}">
-                            <td th:text="${room.name}">
-                                <a th:href=${/login}></a>
+                            <td>
+                                <a th:href="${room.name}" th:text="${room.name}"></a>
                             </td>
                         </tr>
                     </tbody>

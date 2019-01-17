@@ -28,11 +28,13 @@ public class Room {
     @NonNull
     private int seatNum;
 
+    //@OneToOne (mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     @OneToOne
     @PrimaryKeyJoinColumn
     @JsonIgnore
     private Schedule schedule;
 
+    //@ManyToMany(mappedBy = "room", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "rooms_descriptions",
