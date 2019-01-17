@@ -22,46 +22,62 @@
     <nav th:replace="~{/navbar :: nav}"></nav>
     <nav th:replace="~{/verticalnavbar :: div}"></nav>
 
-    <div class="container text-center content">
-        <div class="container">
+    <div class="container">
 
-            <div class="alert alert-success" role="alert" th:if="${success}">
-                Rummet är bokat!
-            </div>
+        <div class="alert alert-success" role="alert" th:if="${success}">
+            Rummet är bokat!
         </div>
 
-        <h1 th:text="${name}"></h1>
-
-        <div class="container">
-            <table class="table">
+        <div class="booking-box">
+            <div class="row">
+                <div class="col">
+                    <h1 th:text="${name}"></h1>
+                </div>
+            </div>
+            <form class="form-add-booking" action="createbooking" method="POST">
+                <div class="row">
+                    <div class="col">
+                        <label for="startTime" class="center">Starttid: </label>
+                        <input type="time" id="startTime" name="start" class="form-control" placeholder="Starttid" required autofocus>
+                    </div>
+                    <div class="col">
+                        <label for="stopTime" class="center">Sluttid: </label>
+                        <input type="time" id="stopTime" name="stop" class="form-control" placeholder="Sluttid" required autofocus>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <input type="hidden" id="roomName" name="roomName" th:value="${roomName}">
+                        <button class="btn btn-block btn-add-booking" type="submit">Boka</button>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </form>
+        </div>
+        <div class="booking-list">
+            <div class="row">
+                <div class="col">
+                    <h2>Bokade tider</h2>
+                </div>
+            </div>
+            <table class="table table-sm table-hover table-striped table-bookings">
                 <thead>
-                    <tr>
-                        <th scope="col">Starttid</th>
-                        <th scope="col">Sluttid</th>
-                    </tr>
+                <tr>
+                    <th scope="col">Starttid</th>
+                    <th scope="col">Sluttid</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="book : ${bookings}" class="" th:classappend="${book.isBooked()} ? table-danger : table-success">
-                        <td th:text="${book.getStartClock()}"></td>
-                        <td th:text="${book.getStopClock()}"></td>
-                    </tr>
+                <tr th:each="book : ${bookings}" class="" th:classappend="${book.isBooked()} ? table-danger : table-success">
+                    <td th:text="${book.getStartClock()}"></td>
+                    <td th:text="${book.getStopClock()}"></td>
+                </tr>
 
                 </tbody>
             </table>
         </div>
     </div>
-
-    <div class="container">
-        <form class="form-signin" action="createbooking" method="post">
-            <label for="startTime" class="center"></label>
-            <input type="time" id="startTime" name="start" class="form-control" placeholder="Starttid" required autofocus>
-            <label for="stopTime" class="center"></label>
-            <input type="time" id="stopTime" name="stop" class="form-control" placeholder="Sluttid" required autofocus>
-            <input type="hidden" id="roomName" name="roomName" th:value="${roomName}">
-            <button class="btn btn-lg" type="submit">Boka</button>
-        </form>
-    </div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
