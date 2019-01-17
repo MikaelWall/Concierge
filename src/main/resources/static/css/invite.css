@@ -49,6 +49,7 @@
 }
 
 .btn-add-invite:hover,
-.btn-send-invite:hover {
+.btn-send-invite:hover,
+.btn-remove-user:hover {
   background: #666;
 }
