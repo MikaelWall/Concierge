@@ -153,23 +153,33 @@ public class ConciergeController {
     @PostMapping("/room/createbooking")
     public String createNewBooking(@RequestParam LocalTime start, @RequestParam LocalTime stop, RedirectAttributes redirectAttributes) {
 
+        Optional<User> findUser = userService.findById(3L);
+        Optional<Room> findRoom = roomService.findByName("Larsson");
         Timespann createdBooking = new Timespann(LocalDate.now().atTime(start), LocalDate.now().atTime(stop), true);
-        User user1 = userService.findById(3L).get();
-        Room room1 = roomService.findByName("Larsson").get();
-        String name = room1.getName();
-        System.out.println(createdBooking.getStart());
-        System.out.println(createdBooking.getStop());
-        Schedule add = new Schedule(createdBooking.getStart(), createdBooking.getStop());
-        System.out.println(add.getStart());
-        System.out.println(add.getStop());
-        add.addUser(user1);
-        add.addRoom(room1);
+        if (findUser.isPresent() & findRoom.isPresent()) {
+            User user1 = findUser.get();
+            Room room1 = findRoom.get();
+            String name = room1.getName();
+            System.out.println(createdBooking.getStart());
+            System.out.println(createdBooking.getStop());
+            Schedule add = new Schedule(createdBooking.getStart(), createdBooking.getStop());
+            System.out.println(add.getStart());
+            System.out.println(add.getStop());
+            add.addUser(user1);
+            add.addRoom(room1);
 
-        scheduleService.save(add);
+            scheduleService.save(add);
 
-        redirectAttributes.addAttribute("name", room1.getName());
+            redirectAttributes
+                    .addAttribute("name", room1.getName())
+                    .addFlashAttribute("success", true);
+            return "redirect:/room/{name}";
+        } else {
+            redirectAttributes
+                    .addFlashAttribute("danger", true);
+            return "redirect:/allrooms";
+        }
 
-        return "redirect:/room/{name}";
     }
 
     @PostMapping("/createroom")

@@ -30,11 +30,8 @@ public class InviteController {
     @GetMapping("/invite")
     public String invite(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        model.addAttribute("addedByFullName", ((User)authentication.getPrincipal()).getFullName());
-        Optional<User> currentUserFind = userService.findByEmail("admin@gmail.com");
-        currentUserFind.ifPresent(user -> model.addAttribute("user", user));
+        model.addAttribute("user", authentication.getPrincipal());
         model.addAttribute("invited", invitedService.findAll());
-//        System.out.println(((User)authentication.getPrincipal()).getFullName());
         return "invite";
     }
 

@@ -19,7 +19,11 @@
 <body>
     <nav th:replace="~{/navbar :: nav}"></nav>
     <nav th:replace="~{/verticalnavbar :: div}"></nav>
+
     <div class="container text-center">
+        <div class="alert alert-danger" role="alert" th:if="${danger}">
+            Kunde inte boka rummet!
+        </div>
         <div class="section">
             <div class="container text-center content">
                 <table class="table">
