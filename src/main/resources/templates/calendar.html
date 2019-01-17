@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset='utf-8' />
+    <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kalender</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
           crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"-->
+          <!--crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
     <!--<link rel="stylesheet" type="text/css" href="https://bootswatch.com/3/slate/bootstrap.min.css">-->
-    <link href='https://bootswatch.com/3/lumen/bootstrap.min.css' rel='stylesheet' />
+    <!--<link href='https://bootswatch.com/3/lumen/bootstrap.min.css' rel='stylesheet' />-->
 
     <link rel="stylesheet" type="text/css" th:href='@{/css/index.css}'>
     <link rel="stylesheet" type="text/css" th:href='@{/css/navbar.css}'>
+    <link rel="stylesheet" type="text/css" th:href='@{/css/verticalnavbar.css}'>
 
-  <link type="text/css" th:href="@{/lib/fullcalendar.min.css}" rel="stylesheet"/>
-  <link type="text/css" th:href="@{/lib/fullcalendar.print.min.css}" rel="stylesheet" media="print"/>
-  <link type="text/css" th:href="@{/lib/scheduler.min.css}" rel="stylesheet"/>
+    <link type="text/css" th:href="@{/lib/fullcalendar.min.css}" rel="stylesheet"/>
+    <link type="text/css" th:href="@{/lib/fullcalendar.print.min.css}" rel="stylesheet" media="print"/>
+    <link type="text/css" th:href="@{/lib/scheduler.min.css}" rel="stylesheet"/>
 
-  <script th:src="@{/lib/moment.min.js}"></script>
-  <script th:src="@{/lib/jquery.min.js}"></script>
-  <script th:src="@{/lib/fullcalendar.min.js}"></script>
-  <script th:src="@{/lib/scheduler.min.js}"></script>
+    <script th:src="@{/lib/moment.min.js}"></script>
+    <script th:src="@{/lib/jquery.min.js}"></script>
+    <script th:src="@{/lib/fullcalendar.min.js}"></script>
+    <script th:src="@{/lib/scheduler.min.js}"></script>
 
-<script th:inline="javascript">
+    <script th:inline="javascript">
 
   $(function() { // document ready
 
     $('#calendar').fullCalendar({
       schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
       defaultView: 'agendaDay',
-      themeSystem:'bootstrap3',
+    //  themeSystem:'bootstrap3',
       defaultDate: new Date(),
       editable: false,
       selectable: true,
@@ -42,15 +44,15 @@
       eventClick: function(calEvent, jsEvent, view) {
 
         if (calEvent.url) {
-          // alert(
-          //   'Clicked ' + calEvent.title + '.\n'
+        //   alert(
+         //    'Clicked ' + calEvent.title + '.\n'
           // );
 
-          window.open(calEvent.url);
+          window.open(calEvent.roomName);
 
           return false; // prevents browser from following link in current tab.
         } else {
-          alert('Clicked ' + calEvent.title);
+          alert('Rummet har: \n'+ calEvent.tag);
         }
       },
 
@@ -61,7 +63,7 @@
 
 
 eventMouseover: function(calEvent, jsEvent) {
-    var tooltip = '<div class="tooltipevent" style="width:100px;height:100px;background:#ccc;position:absolute;z-index:10001;">' + calEvent.title + '</div>';
+    var tooltip = '<div class="tooltipevent" style="width:100px;height:100px;background:#ccc;position:absolute;z-index:10001;">' + 'Rummet har: \n'+ calEvent.tag+ '</div>';
     $("body").append(tooltip);
     $(this).mouseover(function(e) {
         $(this).css('z-index', 10000);
@@ -131,18 +133,43 @@ eventMouseout: function(calEvent, jsEvent) {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (doc) {
-                    var events = [];   //javascript event object created here
+                    var ourCalenderEvents = [];   //javascript event object created here
 
-                    var obj = doc;
+                    let obj = doc;
+                    console.log("Här ÄR obj:");
+                    console.log(obj);
+                    console.log();
                     $(obj).each(function () {
-                            events.push({
-                            title: $(this).attr('user'),  //your calevent object has identical parameters 'title', 'start', ect, so this will work
+                            let titleTextObj = $(this).attr('user');
+
+                            let tagText =$(this).attr('room');
+                            let tagObj= tagText['descriptions'];
+                            let taggar = '';
+                            let titleText = tagText["name"] + " bokad för: " + titleTextObj["fullName"] ;
+                            let room = tagText["name"]
+                            for (let i=0; i<tagObj.length; i++){
+
+                            taggar += tagObj[i].tag+'\n';
+                            }
+
+                            ourCalenderEvents.push({
+                            title: titleText,
+                            url: room,
+                            tag: taggar,
+                            roomName: room,
                             start: $(this).attr('start'), // will be parsed into DateTime object
                             end: $(this).attr('stop'),
                             id: $(this).attr('id')
+
                         });
+
                     });
-                    if (callback) callback(events);
+                    if (callback) {
+                        console.log("Här ÄR MINA EVENT:");
+                        console.log(ourCalenderEvents);
+                        console.log();
+                        callback(ourCalenderEvents);
+                    }
                 }
             });
         }
@@ -169,11 +196,11 @@ eventMouseout: function(calEvent, jsEvent) {
         );
       }
     });
-  
+
   });
 
 </script>
-<style>
+    <style>
 
   body {
     margin: 0;
@@ -206,31 +233,10 @@ eventMouseout: function(calEvent, jsEvent) {
 </head>
 <body>
 
-<!-- navbar -->
-<nav class="navbar navbar-expand-lg fixed-top bg-navy ">
-    <a class="navbar-brand" href="#">Hem</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav mr-4">
-            <li class="nav-item">
-                <a class="nav-link" data-value="om oss" href="Omoss.html">Om oss</a> </li>
-            <li class="nav-item">
-                <a class="nav-link " data-value="logg in" href="Loggin.html">Logg in</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " data-value="registrera" href="Registrera.html">Registrera</a> </li>
-            <li class="nav-item">
-                <a class="nav-link " data-value="team" href="Team.html"> Team</a> </li>
-            <li class="nav-item">
-                <a class="nav-link " data-value="kontakt" href="Kontakt.html">Kontakt</a> </li>
-        </ul>
-    </div>
-</nav>
+<nav th:replace="~{/navbar :: nav}"></nav>
+<nav th:replace="~{/verticalnavbar :: div}"></nav>
 
-    <div id='calendar'></div>
+<div id='calendar'></div>
 
 <!--<p th:text="${bookings}"></p>-->
 
