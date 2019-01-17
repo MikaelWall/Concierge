@@ -65,7 +65,8 @@
                             name="hdmi"
                             id="hdmi"
                             class="form-check-input"
-                            value="Hdmi">
+                            value="true">
+                    <input type="hidden" id="hdmiHidden" name="hdmi" class="form-check-input" value="false">
                     <label for="hdmi" class="form-check-label">HDMI</label>
                 </div>
                 <div class="col form-check text-center">
@@ -74,7 +75,8 @@
                             name="whiteboard"
                             id="whiteboard"
                             class="form-check-input"
-                            value="Whiteboard">
+                            value="true">
+                    <input type="hidden" id="whiteboardHidden" name="whiteboard" class="form-check-input" value="false">
                     <label for="whiteboard" class="form-check-label">Whiteboard</label>
                 </div>
                 <div class="col form-check text-center">
@@ -83,7 +85,8 @@
                             name="projector"
                             id="projector"
                             class="form-check-input"
-                            value="Projector">
+                            value="true">
+                    <input type="hidden" id="projectorHidden" name="projector" class="form-check-input" value="false">
                     <label for="projector" class="form-check-label">Projektor</label>
                 </div>
             </div>
@@ -132,7 +135,7 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
 
-    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    <script type="text/javascript" th:src="@{/js/createroom.js}"></script>
 
 </body>
 

@@ -1,9 +1,7 @@
 package com.nerdblistersteam.concierge.controller;
 
-import com.nerdblistersteam.concierge.domain.Room;
-import com.nerdblistersteam.concierge.domain.Schedule;
-import com.nerdblistersteam.concierge.domain.Timespann;
-import com.nerdblistersteam.concierge.domain.User;
+import com.nerdblistersteam.concierge.domain.*;
+import com.nerdblistersteam.concierge.service.DescriptionService;
 import com.nerdblistersteam.concierge.service.RoomService;
 import com.nerdblistersteam.concierge.service.ScheduleService;
 import com.nerdblistersteam.concierge.service.UserService;
@@ -16,14 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class ConciergeController {
@@ -32,13 +26,15 @@ public class ConciergeController {
     private RoomService roomService;
     private ScheduleService scheduleService;
     private UserService userService;
+    private DescriptionService descriptionService;
     //Detta är ett test för att kunna skilja rum i "room"
     private String rum = "Larsson";
 
-    public ConciergeController(RoomService roomService, ScheduleService scheduleService, UserService userService) {
+    public ConciergeController(RoomService roomService, ScheduleService scheduleService, UserService userService, DescriptionService descriptionService) {
         this.roomService = roomService;
         this.scheduleService = scheduleService;
         this.userService = userService;
+        this.descriptionService = descriptionService;
     }
 
     @GetMapping("/")
@@ -66,7 +62,7 @@ public class ConciergeController {
 
     @GetMapping("/allrooms")
     public String allrooms(Model model) {
-        model.addAttribute("rooms", roomService.findAll()); 
+        model.addAttribute("rooms", roomService.findAll());
         return "feed";
     }
 
@@ -86,7 +82,7 @@ public class ConciergeController {
     //Denna funktion tar ett värde från allrooms och visar sedan lediga och bokade tider för rummet.
     //Koden bör inte ligga här, kanske bättre placering i RoomService.
     @GetMapping("/room/{name}")
-    public String room(@PathVariable String name,Model model) {
+    public String room(@PathVariable String name, Model model) {
 
         Optional<Room> currentRoomFind = roomService.findByName(name);
 
@@ -118,28 +114,28 @@ public class ConciergeController {
 
         for (int i = 0; i < booked.size(); i++) {
             if (i == 0) {
-                if(booked.get(i).getStart().isAfter(openBooking)) {
+                if (booked.get(i).getStart().isAfter(openBooking)) {
                     freeAndBooked.add(new Timespann(openBooking, booked.get(i).getStart(), false));
                 }
 
             }
 
-            if ( i < (booked.size() -1)){
-                if(booked.get(i).getStop().isEqual(booked.get(i+1).getStart())){
+            if (i < (booked.size() - 1)) {
+                if (booked.get(i).getStop().isEqual(booked.get(i + 1).getStart())) {
                     System.out.println("bokning är direkt efter");
                 }
 
             }
 
-            if ( i < (booked.size() -1)) {
-                if(booked.get(i).getStop().isBefore(booked.get(i+1).getStart())) {
-                    freeAndBooked.add(new Timespann(booked.get(i).getStop(), booked.get(i+1).getStart(), false));
+            if (i < (booked.size() - 1)) {
+                if (booked.get(i).getStop().isBefore(booked.get(i + 1).getStart())) {
+                    freeAndBooked.add(new Timespann(booked.get(i).getStop(), booked.get(i + 1).getStart(), false));
                 }
 
             }
 
-            if (i == (booked.size()-1)) {
-                if(booked.get(i).getStop().isBefore(closeBooking)) {
+            if (i == (booked.size() - 1)) {
+                if (booked.get(i).getStop().isBefore(closeBooking)) {
                     freeAndBooked.add(new Timespann(booked.get(i).getStop(), closeBooking, false));
                 }
 
@@ -154,7 +150,7 @@ public class ConciergeController {
 
 
         model.addAttribute("roomName", name);
-        model.addAttribute( "times", free);
+        model.addAttribute("times", free);
         model.addAttribute("bookings", freeAndBooked);
         return "Rum";
     }
@@ -194,11 +190,23 @@ public class ConciergeController {
     }
 
     @PostMapping("/createroom")
-    public String createNewRoom(@RequestParam String name, @RequestParam int seats) {
+    public String createNewRoom(@RequestParam String name, @RequestParam int seats, @RequestParam boolean hdmi, @RequestParam boolean whiteboard, @RequestParam boolean projector) {
         Room newRoom = new Room(name, seats);
+        if (hdmi) {
+            Optional<Description> hdmiDescription = descriptionService.findByTag("HDMI");
+            hdmiDescription.ifPresent(newRoom::addDescription);
+        }
+        if (whiteboard) {
+            Optional<Description> whiteboardDescription = descriptionService.findByTag("Whiteboard");
+            whiteboardDescription.ifPresent(newRoom::addDescription);
+        }
+        if (projector) {
+            Optional<Description> projectorDescription = descriptionService.findByTag("Projektor");
+            projectorDescription.ifPresent(newRoom::addDescription);
+        }
         //Description newDescription = new Description(seats);
         roomService.save(newRoom);
-       // descriptionRepository.save(newDescription);
+        // descriptionRepository.save(newDescription);
         System.out.println("Skapat rum " + name);
         return "redirect:/createroom";
     }
