@@ -1,20 +1,22 @@
-
 html,
 body {
   height: 100%;
-}
-
-.button{
-    border: 1px solid #666;
-    background: #690000;
-    color: #fff;
+  font-family: 'Montserrat', sans-serif;
 
 }
-.button:hover{
+
+.button {
+  border: 1px solid #666;
+  background: #690000;
+  color: #fff;
+
+}
+
+.button:hover {
   background: #666;
 }
 
-.text-center{
+.text-center {
   display: block;
   width: 500px;
   height: 500px;
@@ -22,8 +24,9 @@ body {
   background: rgb(255, 255, 255);
 
 }
-.container a{
-color: #666;
+
+.container a {
+  color: #666;
 }
 
 .container {
@@ -59,7 +62,7 @@ color: #666;
   font-size: 16px;
 }
 
-.form-control:hover{
+.form-control:hover {
   border: 3px solid rgba(102, 102, 102, 0.418);
 }
 
@@ -103,11 +106,11 @@ color: #666;
   border-top-right-radius: 0;
 }
 
-body{
+body {
   background-image: url("./img/bild2.jpeg");
   background-repeat: repeat;
   background-size: 25rem;
   background-attachment: fixed;
 
-  
+
 }
