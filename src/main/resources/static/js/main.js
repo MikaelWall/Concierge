@@ -1,8 +1,8 @@
-$(document).ready(function () {
-    $('.header').height($(window).height());
+$(document).ready(() => {
+    $('.header-index').height($(window).height());
 })
 
-$(".navbar a").click(function () {
+$(".navbar a").click(() => {
     $("body,html").animate({
         scrollTop: $("#" + $(this).data('value')).offset().top
     }, 1000)

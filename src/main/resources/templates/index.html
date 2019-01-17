@@ -23,14 +23,14 @@
 </head>
 
 <body>
-    <header class="header">
+    <header class="header header-index">
         <div class="overlay">
             <div class="container">
                 <div class="description">
                     <h1> Välkommen till <span class="greatv-big">Concierge</span>
                         <p> Ett enket sätt att boka rum.
                         </p>
-                        <button class="btn btn-outline-secondary btn-lg">Se mer</button> </h1>
+                        <a href="#preview" class="btn btn-lg">Se mer</a> </h1>
                 </div>
                 <nav class="navbar navbar-expand-lg bg-navy ">
                         <a class="navbar-brand greatv" th:href="@{/}">Concierge</a>
@@ -54,21 +54,23 @@
     </header>
 
     <!-- portfolio -->
-    <div class="portfolio">
-        <h1 class="text-center">Portfolio</h1>
+    <div id="preview" class="portfolio">
+        <h1 class="text-center">Förhandsvisning</h1>
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12">
-
-                    <img th:src="@{/img/bild5.jpeg}" class="img-fluid">
+                    <img th:src="@{/img/preview-invite.png}" class="img-fluid shadow">
+                    <small class="text-muted">Bjud in din organistion</small>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-12">
-                    <img th:src="@{/img/bild3.jpeg}" class="img-fluid">
+                    <img th:src="@{/img/preview-createroom.png}" class="img-fluid shadow">
+                    <small class="text-muted">Lägg in bokningsbara rum</small>
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-12">
-                    <img th:src="@{/img/bild4.jpeg}" class="img-fluid">
+                    <img th:src="@{/img/preview-calendar.png}" class="img-fluid shadow">
+                    <small class="text-muted">Få bra överblick över bokade rum</small>
                 </div>
             </div>
         </div>
@@ -85,7 +87,6 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
 
     <script type="text/javascript" th:src="@{/js/main.js}"></script>
 </body>

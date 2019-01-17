@@ -54,7 +54,7 @@
    line-height: 1.5;
 }
 
-.description button {
+.description a {
    border: 1px solid #690000;
    background: #690000;
    color: #fff;
@@ -93,4 +93,14 @@
 
 .btn-register {
   margin-bottom: 10rem;
+  font-family: 'Montserrat', sans-serif;
 }
+
+body{
+   font-family: 'Montserrat', sans-serif;
+}
+
+.portfolio{
+   font-family: 'Montserrat', sans-serif;
+}
+
