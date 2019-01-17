@@ -52,6 +52,10 @@ color: #666;
   font-weight: 400;
 }
 
+.alternatives {
+  font-size: 0.8rem;
+}
+
 .form-signin .form-control {
   position: relative;
   box-sizing: border-box;

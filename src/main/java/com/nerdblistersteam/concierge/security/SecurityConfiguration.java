@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/createroom").hasRole("ADMIN")
                 .antMatchers("/calendar").authenticated()
                 .antMatchers("/allrooms").authenticated()
-                .antMatchers("/api/schedules").authenticated()
+                .antMatchers("/api/*").authenticated()
                 .antMatchers("/room/*").authenticated()
                 .antMatchers("/invite").hasRole("ADMIN")
                 .and()
