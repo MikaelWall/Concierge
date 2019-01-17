@@ -32,7 +32,7 @@
     $('#calendar').fullCalendar({
       schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
       defaultView: 'agendaDay',
-      themeSystem:'bootstrap3',
+    //  themeSystem:'bootstrap3',
       defaultDate: new Date(),
       editable: false,
       selectable: true,
@@ -42,15 +42,15 @@
       eventClick: function(calEvent, jsEvent, view) {
 
         if (calEvent.url) {
-          // alert(
-          //   'Clicked ' + calEvent.title + '.\n'
+        //   alert(
+         //    'Clicked ' + calEvent.title + '.\n'
           // );
 
-          window.open(calEvent.url);
+          window.open(calEvent.roomName);
 
           return false; // prevents browser from following link in current tab.
         } else {
-          alert('Clicked ' + calEvent.title);
+          alert('Rummet har: \n'+ calEvent.tag);
         }
       },
 
@@ -61,7 +61,7 @@
 
 
 eventMouseover: function(calEvent, jsEvent) {
-    var tooltip = '<div class="tooltipevent" style="width:100px;height:100px;background:#ccc;position:absolute;z-index:10001;">' + calEvent.title + '</div>';
+    var tooltip = '<div class="tooltipevent" style="width:100px;height:100px;background:#ccc;position:absolute;z-index:10001;">' + 'Rummet har: \n'+ calEvent.tag+ '</div>';
     $("body").append(tooltip);
     $(this).mouseover(function(e) {
         $(this).css('z-index', 10000);
@@ -131,18 +131,43 @@ eventMouseout: function(calEvent, jsEvent) {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (doc) {
-                    var events = [];   //javascript event object created here
-
-                    var obj = doc;
+                    var ourCalenderEvents = [];   //javascript event object created here
+                   
+                    let obj = doc;
+                    console.log("Här ÄR obj:");
+                    console.log(obj);
+                    console.log();
                     $(obj).each(function () {
-                            events.push({
-                            title: $(this).attr('user'),  //your calevent object has identical parameters 'title', 'start', ect, so this will work
+                            let titleTextObj = $(this).attr('user');
+
+                            let tagText =$(this).attr('room');
+                            let tagObj= tagText['descriptions'];
+                            let taggar = '';
+                            let titleText = tagText["name"] + " bokad för: " + titleTextObj["fullName"] ;
+                            let room = tagText["name"]
+                            for (let i=0; i<tagObj.length; i++){
+
+                            taggar += tagObj[i].tag+'\n';
+                            }
+
+                            ourCalenderEvents.push({
+                            title: titleText,
+                            url: room,
+                            tag: taggar,
+                            roomName: room,
                             start: $(this).attr('start'), // will be parsed into DateTime object
                             end: $(this).attr('stop'),
                             id: $(this).attr('id')
+
                         });
+
                     });
-                    if (callback) callback(events);
+                    if (callback) {
+                        console.log("Här ÄR MINA EVENT:");
+                        console.log(ourCalenderEvents);
+                        console.log();
+                        callback(ourCalenderEvents);
+                    }
                 }
             });
         }
