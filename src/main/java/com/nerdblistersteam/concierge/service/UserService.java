@@ -1,5 +1,6 @@
 package com.nerdblistersteam.concierge.service;
 
+import com.nerdblistersteam.concierge.domain.Invited;
 import com.nerdblistersteam.concierge.domain.Role;
 import com.nerdblistersteam.concierge.domain.User;
 import com.nerdblistersteam.concierge.repository.UserRepository;
@@ -22,42 +23,34 @@ public class UserService {
     private final BCryptPasswordEncoder encoder;
     private final RoleService roleService;
     private final MailService mailService;
+    private final InvitedService invitedService;
 
-    public UserService(UserRepository userRepository, RoleService roleService, MailService mailService) {
+    public UserService(UserRepository userRepository, RoleService roleService, MailService mailService, InvitedService invitedService) {
         this.userRepository = userRepository;
         this.roleService = roleService;
         this.mailService = mailService;
+        this.invitedService = invitedService;
         encoder = new BCryptPasswordEncoder();
     }
 
-    public User registerAdmin(User admin) {
-        String secret = "{bcrypt}" + encoder.encode(admin.getPassword());
-        admin.setPassword(secret);
-        admin.setConfirmPassword(secret);
-        admin.addRole(roleService.findByName("ROLE_ADMIN"));
-        admin.setActivationCode(UUID.randomUUID().toString());
-        admin.setEnabled(false);
-        save(admin);
-        sendEmail(admin);
-        return admin;
-    }
-
-    public User inviteUser(User user) {
-        user.addRole(roleService.findByName("ROLE_USER"));
-        user.setActivationCode(UUID.randomUUID().toString());
-        user.setEnabled(true);
-        save(user);
-        return user;
-    }
-
-    public User registerUser(User user) {
+    public User register(User user, boolean isAdmin) {
         String secret = "{bcrypt}" + encoder.encode(user.getPassword());
         user.setPassword(secret);
         user.setConfirmPassword(secret);
-        user.addRole(roleService.findByName("ROLE_USER"));
+        if (isAdmin) {
+            user.addRole(roleService.findByName("ROLE_ADMIN"));
+        } else {
+            user.addRole(roleService.findByName("ROLE_USER"));
+        }
         user.setActivationCode(UUID.randomUUID().toString());
         user.setEnabled(false);
         save(user);
+        sendEmail(user);
+        Optional<Invited> findInvited = invitedService.findByEmail(user.getEmail());
+        if (findInvited.isPresent()) {
+            Invited invited = findInvited.get();
+            invitedService.delete(invited);
+        }
         return user;
     }
 
@@ -86,11 +79,7 @@ public class UserService {
     }
 
     public void sendEmail(User user) {
-        for (Role role : user.getRoles()) {
-            if (role.getName().equals("ROLE_ADMIN")) {
-                mailService.sendActivationEmail(user);
-            }
-        }
+        mailService.sendActivationEmail(user);
     }
 
     public Optional<User> findByEmail(String email) {

@@ -49,7 +49,7 @@ public class AuthController {
     }
 
     @GetMapping("/profile")
-    public String profile(){
+    public String profile() {
         return "/auth/ProfilSida";
     }
 
@@ -64,7 +64,8 @@ public class AuthController {
             return "redirect:/register";
         } else {
             // register new user
-            User newUser = userService.registerAdmin(user);
+            boolean isAdmin = true;
+            User newUser = userService.register(user, isAdmin);
             redirectAttributes
                     .addAttribute("id", newUser.getId())
                     .addFlashAttribute("success", true);
@@ -94,6 +95,7 @@ public class AuthController {
                     .addAttribute("email", email)
                     .addAttribute("firstName", newInvited.getFirstName())
                     .addAttribute("lastName", newInvited.getLastName())
+                    .addAttribute("isAdmin", newInvited.isAdmin())
                     .addAttribute("readOnly", true);
             return "/auth/Registrera";
         }
@@ -101,7 +103,7 @@ public class AuthController {
     }
 
     @PostMapping("/register/{email}/{activationCode}")
-    public String activateUser(@Valid User user, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public String activateUser(@Valid User user, boolean isAdmin, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             // show validation errors
             logger.info("Validation errors were found while registering a new user.");
@@ -111,7 +113,7 @@ public class AuthController {
             return "redirect:/register";
         } else {
             // register new user
-            User newUser = userService.registerUser(user);
+            User newUser = userService.register(user, isAdmin);
             redirectAttributes
                     .addAttribute("id", newUser.getId())
                     .addFlashAttribute("success", true);

@@ -14,6 +14,9 @@
                 
 <body>
     <div class="container text-center">
+        <div class="alert alert-success" role="alert" th:if="${success}">
+            Du är nu registrerad. Ett aktiveringsmail har skickats till din epost-adress.
+        </div>
         <form class="form-signin" action="register" method="post">
             <!-- <i class="fas fa-gamepad fa-5x"></i> -->
             <h1 class="h3 mb-3 font-weight-normal">Skapa ett konto</h1>
@@ -32,6 +35,9 @@
             
             <label for="inputPasswordConfirm" class="sr-only">Bekräfta lösenord</label>
             <input type="password" id="inputPasswordConfirm" name="confirmPassword" class="form-control" placeholder="Bekräfta lösenord"required />
+
+            <label for="isAdmin" class="sr-only">Admin-rättigheter</label>
+            <input type="hidden" id="isAdmin" name="isAdmin" class="form-control" th:value="${isAdmin}">
             
             <p>Har du redan ett konto? <a th:href="@{/login}">Logga in</a></p>
             <button class="btn btn-lg button btn-block" type="submit">Skapa ett konto</button>
