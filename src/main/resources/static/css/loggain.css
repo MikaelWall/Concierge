@@ -1,8 +1,8 @@
-
 html,
 body {
   height: 100%;
   font-family: 'Montserrat', sans-serif;
+
 }
 
 .loggbutton{
@@ -34,7 +34,7 @@ color: #666;
   -ms-flex-align: center;
   align-items: center;
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 5rem;
 }
 
 .form-signin {
@@ -90,13 +90,3 @@ color: #666;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   }
-
-
-body{
-  background-image: url("./img/bild2.jpeg");
-  background-repeat: repeat;
-  background-size: 25rem;
-  background-attachment: fixed;
-
-  
-}

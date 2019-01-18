@@ -20,22 +20,31 @@
     <nav th:replace="~{/navbar :: nav}"></nav>
     <nav th:replace="~{/verticalnavbar :: div}"></nav>
 
-    <div class="container text-center">
+    <div class="container">
         <div class="alert alert-danger" role="alert" th:if="${danger}">
             Kunde inte boka rummet!
         </div>
-        <div class="section">
-            <div class="container text-center content">
-                <table class="table">
-                    <tbody class="text-center">
-                        <tr th:each="room : ${rooms}">
-                            <td>
-                                <a th:href="@{|/room/${room.name}|}" th:text="${room.name}"></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="card shadow" th:each="room : ${rooms}">
+            <a th:href="@{|/room/${room.name}|}">
+                <h5 class="card-header" th:text="${room.name}"></h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-text">
+                                <span>Antal platser: </span><span th:text="${room.seatNum}"></span>
+                            </p>
+                        </div>
+                        <div class="col"></div>
+                        <div class="col">
+                            <ul>
+                                <li th:each="description : ${room.descriptions}">
+                                    <span th:text="${description.tag}"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </body>
